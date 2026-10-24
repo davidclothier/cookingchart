@@ -1,0 +1,29 @@
+recipe "Chicken and rice"
+description "Two lanes: the rice boils on its own while the chicken cooks"
+cuisine "Latin American"
+servings 2
+cooks 1
+
+ingredients
+  rice     200 g
+  water    400 ml
+  salt     1 pinch
+  chicken  400 g
+  oil      2 tbsp
+  garlic   2 cloves
+  pepper   1 pc     "Bell pepper"
+
+tools
+  pot, pan
+
+block "Rice"
+  cooked_rice = boil(rice, water, salt) in pot 20min
+end
+
+block "Chicken"
+  sofrito        = saute(oil, garlic, pepper) in pan @heat:high 5min
+  cooked_chicken = cook(sofrito, chicken) in pan @heat:medium 20min unattended
+end
+
+chicken_rice = mix(cooked_rice, cooked_chicken) in pan 5min
+serve chicken_rice "Chicken and rice"

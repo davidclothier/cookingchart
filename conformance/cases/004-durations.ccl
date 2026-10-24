@@ -1,0 +1,9 @@
+recipe "Durations"
+ingredients
+  stock 1 l
+  rice 300 g
+a = heat(stock) 90s
+b = boil(a, rice) 1h30
+c = reduce(b) 8-10min until "thick"
+d = rest(c) ~5min
+serve d

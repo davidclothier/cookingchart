@@ -1,0 +1,67 @@
+{# English copy for the tutorial. Each step's recipe lives in app/static/tutorial/en/NN.ccl #}
+
+{% set eyebrow = 'Tutorial · 8 steps' %}
+{% set title = 'From a simple recipe to a complete Cooking Chart' %}
+{% set lead = 'We will write spaghetti with tomato sauce, starting with the bare minimum and adding one idea at each step. Each step shows the code, with what is new highlighted, and how the chart changes.' %}
+{% set anchor = 'step' %}
+{% set steps_label = 'Tutorial steps' %}
+{% set step = 'Step' %}
+{% set chart_label = 'This is the chart' %}
+{% set open_editor = 'Open this step in the editor' %}
+{% macro new_lines(n) %}{{ n }} {{ 'new line' if n == 1 else 'new or changed lines' }}{% endmacro %}
+
+{% set steps = [
+    ('The bare minimum',
+     '<p>A recipe has three parts: the <strong>ingredients</strong>, the <strong>steps</strong> and the <strong>dish</strong> you serve. Each step is a single line:</p>
+      <p class="font-mono text-sm bg-stone-100 rounded px-3 py-2">result = verb(inputs) duration</p>
+      <p>The verb comes from a shared vocabulary. <code>boil</code> is a stovetop verb (orange bar) and <em>unattended</em> by default: while it boils you can do something else. That is why the bar is hatched.</p>',
+     'Ingredients drop onto the step that uses them, with their quantity. The gold circle is the dish, with the total time.'),
+
+    ('Chaining steps',
+     '<p>First the water boils, then the pasta cooks, and finally it is drained. Just use the <strong>result</strong> of one step as an <strong>input</strong> of the next: <code>boiling_water</code> comes out of one step and goes into the other.</p>
+      <p>You don\'t write times or the order of the steps: the scheduler works them out from the names.</p>',
+     'The salt doesn\'t go in at the start: it drops in right when the pasta starts cooking, which is when it is used. Draining isn\'t hatched, because that one needs you.'),
+
+    ('Something in parallel: the sauce',
+     '<p>The sauce doesn\'t depend on the pasta, so it can be made at the same time. You don\'t say it is parallel: you just write it. The chart gives it its own <strong>lane</strong> and makes it flow into the step that uses it, <code>mix</code>.</p>
+      <p>One after another these steps would take 44 minutes; in parallel the recipe takes 25.</p>',
+     'The sauce sets the pace: it is the <strong>critical path</strong> (the white line under its bars). The pasta finishes earlier and waits: that is the dashed stretch.'),
+
+    ('An ingredient halfway through',
+     '<p>Not everything goes in at the start of a step. The basil is added when the sauce has been on the heat for 12 minutes. Write it with a <code>+</code> right below the step:</p>
+      <p class="font-mono text-sm bg-stone-100 rounded px-3 py-2">+ basil at 12min</p>
+      <p>The minute counts from the start of that step. It also works for something prepared in another step, not only for ingredients.</p>',
+     'The basil drops onto the simmering bar at its exact minute, not at the start.'),
+
+    ('Tools and hands',
+     '<p>So far the chart assumed endless hands. With <code>cooks 1</code> you say a single person is cooking, and the scheduler won\'t let two steps that need your hands overlap.</p>
+      <p>We also declare the <strong>tools</strong> and where each step happens (<code>in pot</code>, <code>with colander</code>), plus a parameter like <code>@heat:low</code>. All of this is optional: you only write it if it matters to you.</p>',
+     'The <strong>Hands</strong> strip below the chart shows when you are busy: 11 of the 25 minutes. The heat and the water do the rest.'),
+
+    ('What can\'t wait',
+     '<p>In the previous step the pasta was done at minute 19 and waited for the sauce. Pasta that waits gets mushy or sticky. As the author, you say so with <code>no wait</code> on the cooked and the drained pasta.</p>
+      <p>The scheduler delays the pasta so it arrives right when the sauce is ready. If that were impossible (say, because your hands are busy at that moment), it wouldn\'t change the recipe: it would mark the wait in red so you can decide.</p>',
+     'Now the pasta starts at minute 12 and ends right before mixing. What waits is the boiling water, which doesn\'t spoil.'),
+
+    ('Just in time',
+     '<p><code>no wait</code> protects what matters, but everything else still happens as soon as possible. If you\'d rather have <em>everything</em> finish right when it is needed, declare it with <code>schedule just_in_time</code>.</p>
+      <p>It is the recipe author\'s decision: the chart will be drawn this way wherever it is embedded. Readers can compare with the switch at the top right.</p>',
+     'The water no longer starts boiling at minute 0 but at minute 4: it boils right when the pasta goes in, and nothing waits anymore.'),
+
+    ('Fine details',
+     '<p>To finish, a few details that make the recipe more precise:</p>
+      <ul class="list-disc ml-5 space-y-1">
+        <li><code>9-11min until "al dente"</code>: a duration that is a range, and a condition to know when it is done.</li>
+        <li><code>oil[2/3]</code> and <code>oil[1/3]</code>: the oil is split between the soffritto and the end.</li>
+        <li><code>"Tomato sauce"</code>: the displayed name, different from the identifier.</li>
+        <li>The grated cheese: a third lane added halfway through mixing.</li>
+        <li><code>servings</code> and <code>description</code> in the header.</li>
+      </ul>',
+     'The cheese has its own lane and goes in at minute 1 of mixing. Hover any step to see its time window, what it uses and what it produces.'),
+] %}
+
+{% set end_title = 'You now know most of the language' %}
+{% set end_text = 'A few pieces are left for more advanced cases: limited burners, tools that change state (preheating the oven), named blocks and vocabulary packs. They are in the specification. Meanwhile, open the final recipe in the editor and make it your own.' %}
+{% set end_editor = 'Open the final recipe in the editor' %}
+{% set end_spec = 'Read the specification' %}
+{% set end_embed = 'Embed it on your site' %}

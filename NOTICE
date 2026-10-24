@@ -1,0 +1,21 @@
+Cooking Chart
+Copyright 2025-2026 David Clothier
+
+This product includes software developed by David Clothier.
+
+Licensing
+---------
+- Source code (app/, tools/, conformance/run.js): Apache License 2.0, see LICENSE.
+- Specification (SPEC.md, SPEC.es.md) and conformance cases: CC BY 4.0,
+  see LICENSE-SPEC.
+
+Trademarks
+----------
+"Cooking Chart", "CCL" and the Cooking Chart logo are not licensed under
+either license. See TRADEMARKS.md for what you can and cannot do with them.
+
+Third-party software
+--------------------
+The embeddable build loads D3 (https://d3js.org, ISC License,
+Copyright 2010-2023 Mike Bostock) from a public CDN at runtime. D3 is not
+redistributed in this repository.

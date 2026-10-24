@@ -1,0 +1,60 @@
+{
+  "lang": "es",
+  "cuisine": null,
+  "plan": null,
+  "cooks": null,
+  "burners": null,
+  "packs": [],
+  "ingredients": [
+    {
+      "id": "huevos",
+      "quantity": 2,
+      "unit": "ud"
+    }
+  ],
+  "steps": [
+    {
+      "id": "batidos",
+      "verb": "beat",
+      "kind": "prep",
+      "attention": "active",
+      "duration": 2,
+      "durationMin": 2,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "huevos",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": null
+    }
+  ],
+  "final": "batidos",
+  "diagnostics": [],
+  "schedule": {
+    "normative": true,
+    "asap": {
+      "total": 2,
+      "starts": {
+        "batidos": 0
+      },
+      "critical": [
+        "batidos"
+      ],
+      "violations": []
+    },
+    "alap": {
+      "total": 2,
+      "starts": {
+        "batidos": 0
+      },
+      "critical": [
+        "batidos"
+      ],
+      "violations": []
+    }
+  }
+}

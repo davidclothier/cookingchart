@@ -1,0 +1,27 @@
+receta "Espaguetis con tomate"
+cocineros 1
+
+ingredientes
+  pasta     200 g
+  agua      2 l
+  sal       1 cda
+  ajo       2 dientes
+  aceite    3 cda
+  tomate    400 g
+  albahaca  6 hojas
+
+herramientas
+  olla, sartén, colador
+
+agua_hirviendo = hervir(agua) en olla 8min
+pasta_cocida   = cocer(pasta, agua_hirviendo, sal) en olla 10min
+espaguetis     = escurrir(pasta_cocida) con colador 1min
+
+ajo_picado = picar(ajo) 3min
+sofrito    = pochar(ajo_picado, aceite) en sartén @fuego:bajo 5min
+salsa      = guisar(sofrito, tomate) en sartén @fuego:medio 15min
+  + albahaca a los 12min
+
+plato = mezclar(espaguetis, salsa) en sartén 2min
+
+servir plato

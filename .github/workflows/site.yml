@@ -1,0 +1,51 @@
+# Comprueba la conformidad, que el componente incrustable está al día y que
+# el sitio se exporta. Si el repositorio tiene la variable CC_SITE_URL (el
+# dominio propio), además lo publica en GitHub Pages.
+name: Site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: pip install -r requirements.txt
+      - run: npm ci
+      - name: Conformance
+        run: node conformance/run.js
+      - name: Embeddable bundle, AI prompt and CSS are up to date
+        run: python tools/build_embed.py && python tools/build_ai.py && npm run build:css && git diff --exit-code app/static/embed/ app/static/ai/ app/static/llms.txt app/static/css/tailwind.css
+      - name: Static site
+        run: python tools/build_static.py --site-url "${{ vars.CC_SITE_URL || 'https://cookingchart.org' }}" --repo-url "https://github.com/${{ github.repository }}"
+      - uses: actions/upload-pages-artifact@v3
+        if: vars.CC_SITE_URL != '' && github.ref == 'refs/heads/main'
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    if: vars.CC_SITE_URL != '' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

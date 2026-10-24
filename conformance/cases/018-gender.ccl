@@ -1,0 +1,17 @@
+# Género gramatical opcional (§3.1, §6.1): no cambia el plan
+receta "Huevos con patatas"
+cocineros 1
+
+ingredientes
+  patatas  500 g (f pl)
+  huevos   2 ud
+  aceite   200 ml "Aceite de oliva" (m)
+
+herramientas
+  sartén (f), espumadera (F) x 2
+
+fritas "Patatas fritas" (f pl) = freír(patatas, aceite[3/4]) en sartén 15min
+fritos (m pl) = freír(huevos, aceite[1/4]) en sartén con espumadera 3min
+plato = emplatar(fritas, fritos) 1min
+
+servir plato

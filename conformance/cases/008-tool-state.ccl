@@ -1,0 +1,8 @@
+recipe "Tool state"
+ingredients
+  dough 1 pc
+tools
+  oven
+hot_oven "Oven at 220°C" = preheat(oven) @220ºC 20min
+bread = bake(dough) in hot_oven @220ºC 35min
+serve bread

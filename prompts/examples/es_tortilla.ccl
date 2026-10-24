@@ -1,0 +1,25 @@
+receta "Tortilla de patatas"
+cocina "Española"
+raciones 4
+cocineros 1
+
+ingredientes
+  patatas  600 g
+  cebolla  1 ud
+  aceite   200 ml   "Aceite de oliva"
+  huevos   6 ud
+  sal      1 pizca
+
+herramientas
+  sartén, bol
+
+laminas         "Patatas laminadas" = pelar(patatas) 8min
+cebolla_picada  = picar(cebolla) 4min
+confitadas      "Patatas confitadas" = confitar(laminas, cebolla_picada, aceite) en sartén @fuego:medio 18-22min hasta "estén tiernas"
+huevo_batido    = batir(huevos, sal) en bol 3min
+escurridas      "Patatas escurridas" = escurrir(confitadas) 2min
+mezcla          = mezclar(escurridas, huevo_batido) en bol 2min
+mezcla_reposada = reposar(mezcla) 5min
+tortilla        = cocinar(mezcla_reposada) en sartén @fuego:medio 6min
+
+servir tortilla "Tortilla de patatas"

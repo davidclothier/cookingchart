@@ -1,0 +1,48 @@
+receta "Ramen shoyu"
+descripcion "Un caldo largo y dos preparaciones en paralelo que solo se juntan en el bol"
+cocina "Japonesa"
+raciones 4
+cocineros 1
+
+ingredientes
+  huesos     1,5 kg    "Huesos de pollo"
+  agua       4 l
+  jengibre   30 g
+  ajo        4 dientes
+  cebolleta  2 ud
+  panceta    600 g     "Panceta de cerdo"
+  soja       200 ml    "Salsa de soja"
+  mirin      100 ml
+  sake       100 ml
+  azucar     2 cda     "Azúcar"
+  huevos     4 ud
+  fideos     500 g     "Fideos de ramen"
+  nori       2 hojas
+  menma      80 g
+
+herramientas
+  olla_grande, olla, cazo
+
+bloque "Caldo"
+  huesos_limpios = escaldar(huesos) en olla_grande 10min
+  caldo          = cocer(huesos_limpios, agua, jengibre, ajo, cebolleta[1/2]) en olla_grande @fuego:bajo 3h
+  caldo_colado   = colar(caldo) 5min
+fin
+
+bloque "Chashu"
+  rollo           = envolver(panceta) 10min
+  tare            "Tare (salsa base)" = mezclar(soja, mirin, sake, azucar) 2min
+  chashu          = brasear(rollo, tare[1/2]) en olla 2h
+  chashu_laminado = laminar(chashu) 5min
+fin
+
+bloque "Huevos"
+  huevos_cocidos = cocer(huevos) en cazo 6-7min
+  huevos_frios   = enfriar(huevos_cocidos) 5min @agua_con_hielo
+  ajitama        "Huevos marinados" = marinar(huevos_frios, tare[1/2]) 2h
+fin
+
+fideos_cocidos = cocer(fideos) en cazo 2min sin espera
+ramen = montar(caldo_colado, fideos_cocidos, chashu_laminado, ajitama, nori, menma, cebolleta[1/2]) 5min
+
+servir ramen "Ramen shoyu"

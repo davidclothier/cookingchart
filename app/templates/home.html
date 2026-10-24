@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% import 'content/home_' ~ lang ~ '.html' as C %}
+
+{% block main_class %}max-w-7xl mx-auto px-4 sm:px-6 lg:px-8{% endblock %}
+
+{% block extra_head %}
+<script src="{{ asset('/embed.js') }}" defer></script>
+<style>
+  .hero { padding: 64px 0 8px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 48px; align-items: end; }
+  .hero h1 { font-size: clamp(46px, 7vw, 100px); line-height: .96; margin: 14px 0 0; }
+  .lede { font-size: 21px; color: var(--ink-soft); max-width: 31em; margin: 0; }
+  .lede strong { color: var(--ink); font-weight: 500; }
+
+  figure.plate { margin: 44px 0 0; padding: 22px 22px 12px; background: var(--paper-light); border: 1px solid var(--rule); position: relative;
+                 box-shadow: 0 1px 0 var(--rule), 0 18px 40px -28px rgba(60, 40, 10, .45); }
+  figure.plate .plate-no { position: absolute; top: -10px; left: 22px; background: var(--paper); padding: 0 10px; }
+  figcaption { display: flex; justify-content: space-between; align-items: baseline; gap: 12px 24px; flex-wrap: wrap; border-top: 1px solid var(--rule); margin-top: 8px; padding-top: 10px; font-size: 16px; font-style: italic; color: var(--ink-soft); }
+  figcaption b { font-style: normal; font-family: var(--display); font-weight: 600; color: var(--ink); }
+  details.source { width: 100%; }
+  details.source summary { cursor: pointer; list-style: none; text-align: right; font-style: normal; margin-top: -1.6em; }
+  details.source summary::-webkit-details-marker { display: none; }
+  details.source summary::before { content: "＋ "; }
+  details.source[open] summary::before { content: "－ "; }
+  details.source .code-block { margin-top: 14px; font-style: normal; }
+
+  section.chapter { margin-top: 84px; padding-top: 72px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 40px; }
+  .num { font-family: var(--display); font-size: 84px; line-height: .8; font-weight: 300; color: var(--rule); font-variation-settings: "opsz" 144; }
+  .num .label { display: block; margin-top: 16px; }
+  section.chapter h2 { font-size: clamp(32px, 4.2vw, 52px); line-height: 1.04; margin: 0 0 18px; }
+  .cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin-top: 34px; }
+  .cols h3 { font-weight: 600; font-size: 22px; margin: 0 0 6px; }
+  .cols p { margin: 0; color: var(--ink-soft); font-size: 17px; }
+  .cols .bar { height: 8px; width: 46px; border-radius: 2px; margin-bottom: 14px; }
+  .cols a.more { display: inline-block; margin-top: 12px; }
+
+  dl.glossary { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 0 24px; margin: 26px 0 0; }
+  dl.glossary dt { padding-top: 14px; }
+  dl.glossary dd { margin: 0; border-bottom: 1px dotted var(--rule); padding: 10px 0 14px; }
+  dl.glossary dd b { font-family: var(--display); font-weight: 600; font-size: 20px; display: block; }
+  dl.glossary dd span { color: var(--ink-soft); font-size: 17px; }
+
+  .specimens { margin-top: 28px; background: var(--paper-light); border: 1px solid var(--rule); padding: 8px 22px; }
+  .specimens a { display: grid; grid-template-columns: 11rem minmax(0, 1fr); align-items: center; gap: 18px; padding: 12px 0; border-bottom: 1px dotted var(--rule); text-decoration: none; color: inherit; }
+  .specimens a:last-child { border-bottom: 0; }
+  .specimens b { font-family: var(--display); font-weight: 600; font-size: 18px; display: block; }
+  .specimens i { color: var(--ink-soft); font-size: 15px; }
+  .specimens a:hover b { color: var(--heat); }
+
+  .open-points { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 36px; margin-top: 28px; }
+  .open-points b { font-family: var(--display); font-weight: 600; font-size: 20px; display: block; }
+  .open-points span { color: var(--ink-soft); font-size: 17px; }
+
+  @media (max-width: 860px) {
+    .hero, section.chapter { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    .hero { padding-top: 36px; }
+    .num { font-size: 52px; }
+    .cols, .open-points { grid-template-columns: minmax(0, 1fr); }
+    .specimens a { grid-template-columns: 7.5rem minmax(0, 1fr); }
+    figure.plate { padding: 18px 10px 10px; }
+    details.source summary { margin-top: 0; text-align: left; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div>
+        <p class="label">{{ C.eyebrow }}</p>
+        <h1>{{ C.hero_title | safe }}</h1>
+    </div>
+    <div>
+        <p class="lede">{{ C.hero_lead | safe }}</p>
+        <div class="mt-7 flex flex-wrap items-center gap-6">
+            <a href="{{ base }}/editor" class="btn-ink">{{ C.cta_editor }}</a>
+            <a href="{{ base }}/tutorial" class="btn-line label" style="color:var(--ink)">{{ C.cta_tutorial }} →</a>
+        </div>
+    </div>
+</div>
+
+<figure class="plate">
+    <span class="plate-no label">{{ C.plate_no }}</span>
+    <cooking-chart controls>{{ C.hero_ccl }}</cooking-chart>
+    <figcaption>
+        <span><b>{{ C.plate_title }}</b> {{ C.plate_caption }}</span>
+        <details class="source">
+            <summary class="label">{{ C.write_this }}</summary>
+            <pre class="code-block" aria-label="CCL">{{ C.hero_ccl | ccl }}</pre>
+        </details>
+    </figcaption>
+</figure>
+
+<section class="chapter">
+    <div class="num">I<span class="label">{{ C.ch_problem }}</span></div>
+    <div>
+        <h2>{{ C.problem_title | safe }}</h2>
+        <p class="lede">{{ C.problem_lead }}</p>
+        <div class="cols">
+            {% for title, text in C.problems %}
+            <div><div class="bar" style="background: {{ ['#0e7490', '#ea580c', '#b91c1c'][loop.index0] }}"></div><h3>{{ title }}</h3><p>{{ text }}</p></div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="chapter">
+    <div class="num">II<span class="label">{{ C.ch_read }}</span></div>
+    <div>
+        <h2>{{ C.read_title | safe }}</h2>
+        <p class="lede">{{ C.read_lead }}</p>
+        <dl class="glossary">
+            {% for glyph, title, text in C.legend %}
+            <dt>{% include 'content/glyph_' ~ glyph ~ '.svg' %}</dt>
+            <dd><b>{{ title }}</b><span>{{ text }}</span></dd>
+            {% endfor %}
+        </dl>
+    </div>
+</section>
+
+<section class="chapter">
+    <div class="num">III<span class="label">{{ C.ch_writers }}</span></div>
+    <div>
+        <h2>{{ C.writers_title | safe }}</h2>
+        <p class="lede">{{ C.writers_lead }}</p>
+        <div class="cols">
+            {% for title, text, link, label in C.writers %}
+            <div><div class="bar" style="background: {{ ['#7c3aed', '#0e7490', '#ca8a04'][loop.index0] }}"></div><h3>{{ title }}</h3><p>{{ text }}</p>
+                <a class="more btn-line label" style="color:var(--ink)" href="{{ base }}/{{ link }}">{{ label }} →</a></div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="chapter">
+    <div class="num">IV<span class="label">{{ C.ch_pieces }}</span></div>
+    <div>
+        <h2>{{ C.pieces_title | safe }}</h2>
+        <div class="cols">
+            {% for title, text, link, label in C.pieces %}
+            <div><div class="bar" style="background: {{ ['#221c15', '#ea580c', '#64748b'][loop.index0] }}"></div><h3>{{ title }}</h3><p>{{ text }}</p>
+                <a class="more btn-line label" style="color:var(--ink)" href="{{ base }}/{{ link }}">{{ label }} →</a></div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="chapter">
+    <div class="num">V<span class="label">{{ C.ch_signatures }}</span></div>
+    <div>
+        <h2>{{ C.signature_title | safe }}</h2>
+        <p class="lede">{{ C.signature_lead }}</p>
+        <div class="specimens">
+            {% for slug, name, total, width in C.signatures %}
+            <a href="{{ base }}/gallery#{{ slug }}">
+                <span><b>{{ name }}</b><i>{{ total }}</i></span>
+                <span class="block" style="width: {{ width }}%"><cooking-chart variant="signature" src="/static/recipes/{{ lang }}/{{ slug }}.ccl"></cooking-chart></span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="chapter">
+    <div class="num">VI<span class="label">{{ C.ch_open }}</span></div>
+    <div>
+        <h2>{{ C.open_title | safe }}</h2>
+        <p class="lede">{{ C.open_lead }}</p>
+        <div class="open-points">
+            {% for title, text in C.open_points %}
+            <div><b>{{ title }}</b><span>{{ text }}</span></div>
+            {% endfor %}
+        </div>
+        <div class="mt-8 flex flex-wrap items-center gap-6">
+            <a href="{{ base }}/spec" class="btn-ink">{{ C.cta_spec }}</a>
+            <a href="https://github.com/davidclothier/cookingchart" class="btn-line label" style="color:var(--ink)">GitHub →</a>
+            <a href="{{ base }}/about" class="btn-line label" style="color:var(--ink)">{{ t('nav.about') }} →</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,9 @@
+receta "Aguanta"
+ingredientes
+  leche 500 ml
+  harina 50 g
+  carne 500 g
+bechamel = cocinar(leche, harina) 10min aguanta 15min
+salsa = guisar(carne) 60min
+plato = montar(bechamel, salsa) 5min
+servir plato

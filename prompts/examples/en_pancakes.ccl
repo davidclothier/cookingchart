@@ -1,0 +1,27 @@
+recipe "Fluffy pancakes"
+cuisine "American"
+servings 4
+cooks 1
+
+ingredients
+  flour          200 g
+  baking_powder  2 tsp    "Baking powder"
+  salt           1 pinch
+  eggs           2 pc
+  milk           300 ml
+  butter         30 g
+  syrup          as needed  "Maple syrup"
+
+tools
+  bowl x 2, saucepan, skillet
+
+dry_mix       "Dry mix" = mix(flour, baking_powder, salt) in bowl 2min
+melted_butter = melt(butter) in saucepan @heat:low 2min
+wet_mix       "Wet mix" = beat(eggs, milk, melted_butter) in bowl 3min
+batter        = mix(dry_mix, wet_mix) in bowl 2min
+rested_batter "Rested batter" = rest(batter) 10min
+hot_skillet   "Hot skillet" = heat(skillet) @heat:medium 4min
+pancakes      = cook(rested_batter) in hot_skillet @heat:medium 14-18min until "golden" no wait
+plated        = plate(pancakes, syrup) 2min
+
+serve plated "Fluffy pancakes"

@@ -1,0 +1,67 @@
+{# Textos del tutorial en español. Las recetas de cada paso están en app/static/tutorial/es/NN.ccl #}
+
+{% set eyebrow = 'Tutorial · 8 pasos' %}
+{% set title = 'De una receta sencilla a un Cooking Chart completo' %}
+{% set lead = 'Vamos a escribir unos espaguetis con tomate empezando por lo mínimo y añadiendo una idea en cada paso. En cada uno verás el código, con lo nuevo resaltado, y cómo cambia el gráfico.' %}
+{% set anchor = 'paso' %}
+{% set steps_label = 'Pasos del tutorial' %}
+{% set step = 'Paso' %}
+{% set chart_label = 'Así queda el gráfico' %}
+{% set open_editor = 'Abrir este paso en el editor' %}
+{% macro new_lines(n) %}{{ n }} {{ 'línea nueva' if n == 1 else 'líneas nuevas o cambiadas' }}{% endmacro %}
+
+{% set steps = [
+    ('Lo mínimo',
+     '<p>Una receta tiene tres partes: los <strong>ingredientes</strong>, los <strong>pasos</strong> y el <strong>plato</strong> que se sirve. Cada paso es una sola línea:</p>
+      <p class="font-mono text-sm bg-stone-100 rounded px-3 py-2">resultado = verbo(entradas) duración</p>
+      <p>El verbo sale de un vocabulario común. <code>cocer</code> es un verbo de fuego (barra naranja) y por defecto <em>desatendido</em>: mientras cuece, tú puedes hacer otra cosa. Por eso la barra sale rayada.</p>',
+     'Los ingredientes caen sobre el paso que los usa, con su cantidad. El círculo dorado es el plato, con el tiempo total.'),
+
+    ('Pasos encadenados',
+     '<p>Primero hay que hervir el agua, luego cocer la pasta y al final escurrirla. Basta con usar el <strong>resultado</strong> de un paso como <strong>entrada</strong> del siguiente: <code>agua_hirviendo</code> sale de un paso y entra en el otro.</p>
+      <p>No hay que escribir horas ni el orden de los pasos: el planificador los deduce de los nombres.</p>',
+     'La sal no entra al principio: cae justo cuando empieza a cocerse la pasta, que es cuando se usa. Escurrir no va rayado, porque ahí sí estás tú.'),
+
+    ('Algo en paralelo: la salsa',
+     '<p>La salsa no depende de la pasta, así que puede hacerse a la vez. No hay que decir que es paralela: basta con escribirla. El gráfico le da su propio <strong>carril</strong> y la hace desembocar en el paso que la usa, <code>mezclar</code>.</p>
+      <p>Uno detrás de otro, estos pasos sumarían 44 minutos; en paralelo, la receta tarda 25.</p>',
+     'La salsa marca el ritmo: es la <strong>ruta crítica</strong> (la línea blanca bajo sus barras). La pasta termina antes y espera: eso es el tramo discontinuo.'),
+
+    ('Un ingrediente a mitad de paso',
+     '<p>No todo entra al principio de un paso. La albahaca se añade cuando la salsa ya lleva 12 minutos al fuego. Se escribe con un <code>+</code> justo debajo del paso:</p>
+      <p class="font-mono text-sm bg-stone-100 rounded px-3 py-2">+ albahaca a los 12min</p>
+      <p>El minuto se cuenta desde que empieza ese paso. También sirve para algo preparado en otro paso, no solo para ingredientes.</p>',
+     'La albahaca cae sobre la barra del guiso en su minuto exacto, no al principio.'),
+
+    ('Herramientas y manos',
+     '<p>Hasta ahora el gráfico suponía manos infinitas. Con <code>cocineros 1</code> le dices que cocina una sola persona, y el planificador no deja que coincidan dos pasos que necesiten tus manos.</p>
+      <p>También declaramos las <strong>herramientas</strong> y en qué se hace cada paso (<code>en olla</code>, <code>con colador</code>), y algún parámetro como <code>@fuego:bajo</code>. Todo esto es opcional: solo lo escribes si te importa.</p>',
+     'La franja <strong>Manos</strong>, bajo el gráfico, muestra cuándo estás ocupado: 11 de los 25 minutos. El resto lo hacen el fuego y el agua.'),
+
+    ('Lo que no puede esperar',
+     '<p>En el paso anterior la pasta terminaba en el minuto 19 y esperaba a la salsa. Una pasta que espera se pasa o se pega. Como autor, lo dices con <code>sin espera</code> en la pasta cocida y en la escurrida.</p>
+      <p>El planificador retrasa la pasta para que llegue justo cuando la salsa está lista. Si no fuera posible (por ejemplo, porque tus manos están ocupadas en ese momento), no cambiaría la receta: marcaría la espera en rojo para que decidas tú.</p>',
+     'Ahora la pasta empieza en el minuto 12 y termina justo antes de mezclar. Quien espera es el agua hirviendo, que no se estropea.'),
+
+    ('Justo a tiempo',
+     '<p><code>sin espera</code> protege lo que importa, pero el resto sigue haciéndose cuanto antes. Si prefieres que <em>todo</em> termine justo cuando se necesita, decláralo con <code>plan justo_a_tiempo</code>.</p>
+      <p>Es una decisión de quien escribe la receta: el gráfico se dibujará así allí donde se incruste. El lector puede comparar con el selector de arriba a la derecha.</p>',
+     'El agua ya no se pone a hervir en el minuto 0, sino en el 4: hierve justo cuando entra la pasta y ya no hay esperas.'),
+
+    ('Detalles finos',
+     '<p>Para terminar, unos cuantos detalles que hacen la receta más precisa:</p>
+      <ul class="list-disc ml-5 space-y-1">
+        <li><code>9-11min hasta "esté al dente"</code>: una duración que es un rango y una condición para saber cuándo acaba.</li>
+        <li><code>aceite[2/3]</code> y <code>aceite[1/3]</code>: el aceite se reparte entre el sofrito y el final.</li>
+        <li><code>"Salsa de tomate"</code>: el nombre que se muestra, distinto del identificador.</li>
+        <li>El queso rallado: un tercer carril que se añade a mitad de mezclar.</li>
+        <li><code>raciones</code> y <code>descripcion</code> en la cabecera.</li>
+      </ul>',
+     'El queso tiene su propio carril y entra al minuto 1 de mezclar. Pasa el ratón por cualquier paso para ver su ventana de tiempo, qué usa y qué produce.'),
+] %}
+
+{% set end_title = 'Ya conoces casi todo el lenguaje' %}
+{% set end_text = 'Te faltan algunas piezas para casos más avanzados: fuegos limitados, herramientas que cambian de estado (precalentar el horno), bloques con nombre y paquetes de vocabulario. Están en la especificación. Mientras tanto, abre la receta final en el editor y cámbiala a tu gusto.' %}
+{% set end_editor = 'Abrir la receta final en el editor' %}
+{% set end_spec = 'Leer la especificación' %}
+{% set end_embed = 'Incrustarla en tu web' %}

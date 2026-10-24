@@ -1,0 +1,9 @@
+recipe "Errors"
+ingredients
+  eggs 2 pcs
+a = beat(eggs, milk) 2min
+b = cook(a) 
+a = fry(b) 3min
+c = mix(d) 1min
+d = mix(c) 1min
+serve nothing

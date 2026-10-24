@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% import 'content/about_' ~ lang ~ '.html' as C %}
+
+{% block main_class %}max-w-7xl mx-auto px-4 sm:px-6 lg:px-8{% endblock %}
+
+{% block extra_head %}
+<style>
+  .about { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 40px; padding: 64px 0 0; }
+  .about .mark svg { width: 84px; height: 84px; }
+  .about .mark .label { display: block; margin-top: 16px; }
+  .about h1 { font-size: clamp(38px, 5.4vw, 68px); line-height: 1; margin: 0 0 26px; font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 400 !important; letter-spacing: -.03em; }
+  .about h1 em { font-style: italic; font-weight: 300; color: var(--heat); }
+  .story { font-size: 22px; line-height: 1.6; max-width: 34em; margin: 0; }
+  .pieces { font-size: 20px; line-height: 1.55; max-width: 34em; margin: 14px 0 18px; padding-left: 1.2em; list-style: none; }
+  .pieces li { position: relative; margin: 6px 0; }
+  .pieces li::before { content: "—"; position: absolute; left: -1.2em; color: var(--heat); }
+  .signature { font-family: var(--display); font-style: italic; font-size: 22px; margin: 22px 0 0; }
+  .repo { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--rule); max-width: 46rem; }
+  .repo p { color: var(--ink-soft); font-size: 18px; margin: 10px 0 0; }
+  .repo a.big { font-family: var(--mono); font-size: 15px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); }
+  .repo a.big:hover { color: var(--heat); border-color: var(--heat); }
+  .links { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 28px; }
+  @media (max-width: 860px) {
+    .about { grid-template-columns: minmax(0, 1fr); gap: 18px; padding-top: 36px; }
+    .about .mark svg { width: 56px; height: 56px; }
+    .story { font-size: 20px; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<article class="about">
+    <div class="mark">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="9" width="12" height="6" rx="2" fill="#0e7490"/><rect x="15" y="9" width="10" height="6" rx="2" fill="#ea580c"/><path d="M14 22 C 19 22, 20 14, 24 12" fill="none" stroke="#c9bba3" stroke-width="3"/><rect x="5" y="19" width="10" height="6" rx="2" fill="#b91c1c"/><circle cx="28" cy="12" r="3" fill="#ca8a04"/></svg>
+        <span class="label">{{ t('nav.about') }}</span>
+    </div>
+    <div>
+        <h1>{{ C.title | safe }}</h1>
+        <p class="story">{{ C.story }}</p>
+        <ul class="pieces">{% for p in C.pieces %}<li>{{ p }}</li>{% endfor %}</ul>
+        <p class="story">{{ C.closing }}</p>
+        <p class="signature">David Clothier</p>
+
+        <div class="repo">
+            <span class="label">{{ C.repo_label }}</span>
+            <p><a class="big" href="https://github.com/davidclothier/cookingchart">github.com/davidclothier/cookingchart</a></p>
+            <p>{{ C.repo_text }}</p>
+            <p>{{ C.mail_text }} <a href="mailto:hello@cookingchart.org" style="color:var(--ink)">hello@cookingchart.org</a>.</p>
+            <div class="links">
+                <a href="https://github.com/davidclothier/cookingchart" class="btn-ink">{{ C.repo_cta }}</a>
+                <a href="{{ base }}/spec" class="btn-line label" style="color:var(--ink)">{{ t('nav.spec') }} →</a>
+                <a href="mailto:hello@cookingchart.org" class="btn-line label" style="color:var(--ink)">hello@cookingchart.org</a>
+            </div>
+        </div>
+    </div>
+</article>
+{% endblock %}

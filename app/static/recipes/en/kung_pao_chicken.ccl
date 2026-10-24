@@ -1,0 +1,41 @@
+recipe "Kung Pao chicken"
+description "A single wok forces you to take turns; everything else is prepped beforehand"
+cuisine "Asian"
+servings 2
+cooks 1
+
+ingredients
+  chicken      400 g     "Chicken thigh"
+  soy          3 tbsp    "Soy sauce"
+  cornstarch   2 tsp
+  vinegar      1 tbsp    "Chinkiang black vinegar"
+  sugar        2 tsp
+  oil          3 tbsp
+  chilies      8 pcs     "Dried chilies"
+  peppercorns  1 tsp     "Sichuan peppercorns"
+  garlic       3 cloves
+  ginger       15 g
+  scallions    3 pcs
+  peanuts      60 g
+  rice         200 g
+  water        300 ml
+
+tools
+  wok, pot
+
+cooked_rice = boil(rice, water) in pot @covered 15min
+
+diced_chicken     = cut(chicken) 5min
+marinated_chicken = marinate(diced_chicken, soy[1/3], cornstarch[1/2]) 15min
+sauce             = mix(soy[2/3], vinegar, sugar, cornstarch[1/2]) 2min
+aromatics         "Garlic, ginger and scallions" = chop(garlic, ginger, scallions) 5min
+
+toasted_peanuts  = toast(peanuts) in wok 3min
+chili_oil        "Chili oil" = saute(oil, chilies, peppercorns) in wok @heat:high 1min
+stirfried_chicken = saute(chili_oil, marinated_chicken) in wok @heat:high 4min
+kung_pao         = saute(stirfried_chicken, aromatics, sauce) in wok 2min no wait
+  + toasted_peanuts at 1min
+
+dish = plate(kung_pao, cooked_rice) 1min
+
+serve dish "Kung Pao chicken"

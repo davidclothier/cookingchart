@@ -1,0 +1,11 @@
+{
+  "name": "Cooking Chart",
+  "short_name": "Cooking Chart",
+  "icons": [
+    { "src": "/static/img/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/static/img/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#f4eee3",
+  "background_color": "#f4eee3",
+  "display": "browser"
+}

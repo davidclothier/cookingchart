@@ -1,0 +1,12 @@
+receta "Espaguetis con tomate"
+
+ingredientes
+  pasta  200 g
+  agua   2 l
+  sal    1 cda
+
+agua_hirviendo = hervir(agua) 8min
+pasta_cocida   = cocer(pasta, agua_hirviendo, sal) 10min
+espaguetis     = escurrir(pasta_cocida) 1min
+
+servir espaguetis

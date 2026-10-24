@@ -1,0 +1,92 @@
+{
+  "lang": "en",
+  "cuisine": null,
+  "plan": null,
+  "cooks": null,
+  "burners": null,
+  "packs": [],
+  "ingredients": [
+    {
+      "id": "garlic",
+      "quantity": "1-2",
+      "unit": "cloves"
+    },
+    {
+      "id": "oil",
+      "quantity": "3-4",
+      "unit": "tbsp"
+    },
+    {
+      "id": "chili",
+      "quantity": "0.5-1",
+      "unit": "pc"
+    },
+    {
+      "id": "salt",
+      "quantity": "",
+      "unit": "to taste"
+    }
+  ],
+  "steps": [
+    {
+      "id": "garlic_oil",
+      "verb": "fry",
+      "kind": "heat",
+      "attention": "active",
+      "duration": 5,
+      "durationMin": 4,
+      "keep": null,
+      "tools": [
+        "pan"
+      ],
+      "inputs": [
+        {
+          "ref": "garlic",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "oil",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "chili",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "salt",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": null
+    }
+  ],
+  "final": "garlic_oil",
+  "diagnostics": [],
+  "schedule": {
+    "normative": false,
+    "asap": {
+      "total": 5,
+      "starts": {
+        "garlic_oil": 0
+      },
+      "critical": [
+        "garlic_oil"
+      ],
+      "violations": []
+    },
+    "alap": {
+      "total": 5,
+      "starts": {
+        "garlic_oil": 0
+      },
+      "critical": [
+        "garlic_oil"
+      ],
+      "violations": []
+    }
+  }
+}

@@ -1,0 +1,34 @@
+receta "Paella valenciana"
+descripcion "Todo pasa en la misma paella: una sola línea larga a la que van llegando los ingredientes"
+cocina "Mediterránea"
+raciones 4
+cocineros 1
+
+ingredientes
+  pollo     500 g
+  conejo    400 g
+  aceite    6 cda      "Aceite de oliva"
+  judia     200 g      "Judía verde plana"
+  garrofon  150 g      "Garrofón"
+  tomate    1 ud
+  pimenton  1 cdta     "Pimentón dulce"
+  agua      1,5 l
+  azafran   1 pizca    "Azafrán"
+  sal       al gusto
+  arroz     400 g      "Arroz bomba"
+  romero    1 rama
+
+herramientas
+  paella
+
+tomate_rallado = rallar(tomate) 2min
+carne_dorada   = dorar(pollo, conejo, aceite) en paella @fuego:medio 15min
+sofrito        = sofreír(carne_dorada, judia, garrofon) en paella 8min
+  + tomate_rallado a los 5min
+  + pimenton a los 7min
+caldo          = cocer(sofrito, agua, azafran, sal) en paella @fuego:alto 30min
+arroz_cocido   = cocer(caldo, arroz) en paella 17-18min hasta "absorba el caldo" sin espera
+  + romero a los 12min
+paella_lista   = reposar(arroz_cocido) 5min @tapada
+
+servir paella_lista "Paella valenciana"

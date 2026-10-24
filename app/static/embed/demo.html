@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi blog de cocina — prueba de incrustación</title>
+    <!-- Una web cualquiera, con sus propios estilos, que no sabe nada del Cooking Chart -->
+    <style>
+        body { font-family: Georgia, serif; max-width: 760px; margin: 40px auto; padding: 0 16px; line-height: 1.6; color: #333; background: #fffdf8; }
+        h1, h2 { font-family: Georgia, serif; }
+        svg text { fill: hotpink; }          /* estilos agresivos que no deben afectar al gráfico */
+        div { border-color: red; }
+        cooking-chart { margin: 24px 0; }
+    </style>
+    <script src="/static/embed/cooking-chart.js" defer></script>
+</head>
+<body>
+    <h1>Tortilla francesa</h1>
+    <p>Método 1: la receta escrita directamente dentro de la etiqueta.</p>
+    <cooking-chart>
+        receta "Tortilla francesa"
+        cocineros 1
+
+        ingredientes
+          huevos   3 ud
+          sal      1 pizca
+          aceite   2 cda
+
+        mezcla "Mezcla de huevos" = batir(huevos, sal) 2min
+        aceite_caliente = calentar(aceite) en sartén 1min
+        tortilla = cocinar(mezcla, aceite_caliente) en sartén 4-5min hasta "cuaje"
+
+        servir tortilla "Tortilla francesa"
+    </cooking-chart>
+
+    <h2>Lasaña</h2>
+    <p>Método 2: un fichero .ccl con <code>src</code> y el selector de planificación.</p>
+    <cooking-chart src="/static/recipes/es/lasagna_bolognesa.ccl" controls></cooking-chart>
+
+    <h2>Mushroom risotto</h2>
+    <p>Método 3: un bloque de código Markdown <code>```ccl</code>, como lo genera cualquier blog estático.</p>
+    <pre><code class="language-ccl">recipe "Quick risotto"
+cooks 1
+ingredients
+  rice   320 g
+  stock  1.2 l
+  butter 40 g
+hot_stock = heat(stock) 10min unattended
+creamy = boil(rice, hot_stock) 18min attended no wait
+risotto = finish(creamy, butter) 2min
+serve risotto</code></pre>
+
+    <h2>Firmas</h2>
+    <div style="display:flex; gap:16px; align-items:center">
+        <cooking-chart variant="signature" src="/static/recipes/en/french_omelette.ccl" style="width:60px"></cooking-chart>
+        <cooking-chart variant="signature" src="/static/recipes/en/lasagna_bolognese.ccl" style="width:200px"></cooking-chart>
+    </div>
+</body>
+</html>

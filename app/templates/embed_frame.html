@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Cooking Chart</title>
+    <style>
+        html, body { margin: 0; background: transparent; }
+        body { padding: 0; }
+    </style>
+    <script src="{{ asset('/embed.js') }}" defer></script>
+</head>
+<body>
+    <cooking-chart id="chart" controls></cooking-chart>
+    <script>
+        // La receta viaja en el hash (#ccl=<base64url>), así no llega al servidor
+        (function () {
+            const params = new URLSearchParams(location.hash.slice(1));
+            const el = document.getElementById('chart');
+            ['mode', 'lang'].forEach(k => { if (params.get(k)) el.setAttribute(k, params.get(k)); });
+            if (params.get('controls') === '0') el.removeAttribute('controls');
+            const b64 = params.get('ccl') || '';
+            try {
+                el._source = new TextDecoder().decode(Uint8Array.from(atob(b64.replace(/-/g, '+').replace(/_/g, '/')), c => c.charCodeAt(0)));
+            } catch (e) {
+                el._source = '';
+            }
+        })();
+    </script>
+</body>
+</html>

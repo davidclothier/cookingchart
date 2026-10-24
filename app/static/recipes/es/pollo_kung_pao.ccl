@@ -1,0 +1,41 @@
+receta "Pollo Kung Pao"
+descripcion "Un solo wok obliga a ir por turnos; todo lo demás se prepara antes"
+cocina "Asiática"
+raciones 2
+cocineros 1
+
+ingredientes
+  pollo       400 g     "Muslo de pollo"
+  soja        3 cda     "Salsa de soja"
+  maicena     2 cdta
+  vinagre     1 cda     "Vinagre negro de Chinkiang"
+  azucar      2 cdta    "Azúcar"
+  aceite      3 cda
+  guindillas  8 ud      "Guindillas secas"
+  pimienta    1 cdta    "Pimienta de Sichuan"
+  ajo         3 dientes
+  jengibre    15 g
+  cebolleta   3 ud
+  cacahuetes  60 g
+  arroz       200 g
+  agua        300 ml
+
+herramientas
+  wok, olla
+
+arroz_cocido = cocer(arroz, agua) en olla @tapado 15min
+
+dados          = cortar(pollo) 5min
+pollo_marinado = marinar(dados, soja[1/3], maicena[1/2]) 15min
+salsa          = mezclar(soja[2/3], vinagre, azucar, maicena[1/2]) 2min
+aromaticos     "Ajo, jengibre y cebolleta" = picar(ajo, jengibre, cebolleta) 5min
+
+cacahuetes_tostados = tostar(cacahuetes) en wok 3min
+aceite_picante      "Aceite picante" = saltear(aceite, guindillas, pimienta) en wok @fuego:alto 1min
+pollo_salteado      = saltear(aceite_picante, pollo_marinado) en wok @fuego:alto 4min
+kung_pao            = saltear(pollo_salteado, aromaticos, salsa) en wok 2min sin espera
+  + cacahuetes_tostados a los 1min
+
+plato = emplatar(kung_pao, arroz_cocido) 1min
+
+servir plato "Pollo Kung Pao"

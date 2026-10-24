@@ -1,0 +1,42 @@
+recipe "Mushroom risotto"
+description "One cook: risotto needs constant stirring, so the mushrooms can't be sautéed at the same time"
+cuisine "Mediterranean"
+servings 4
+cooks 1
+schedule just_in_time         # the rice can't wait
+
+ingredients
+  rice       320 g     "Arborio rice"
+  stock      1.2 l     "Vegetable stock"
+  onion      1 pc
+  garlic     1 clove
+  mushrooms  300 g
+  wine       100 ml    "White wine"
+  oil        4 tbsp    "Olive oil"
+  butter     40 g
+  parmesan   60 g
+  salt       to taste
+  parsley    1 sprig
+
+tools
+  saucepan, casserole, pan
+
+hot_stock        "Hot stock" = heat(stock) in saucepan 10min unattended
+chopped          "Chopped onion and garlic" = chop(onion, garlic) 5min
+clean_mushrooms  = cut(mushrooms) 5min
+
+block "Mushrooms"
+  sauteed_mushrooms = saute(clean_mushrooms, oil[1/2], salt) in pan @heat:high 6min
+end
+
+block "Risotto"
+  soffritto     = sweat(chopped, oil[1/2]) in casserole @heat:medium 5min
+  toasted_rice  = toast(soffritto, rice) in casserole 2min
+  creamy_rice   = boil(toasted_rice, wine) in casserole @heat:medium 18min attended until "al dente" no wait
+    + hot_stock at 2min
+  risotto       = finish(creamy_rice, butter, parmesan) 2min
+    + sauteed_mushrooms at 1min
+end
+
+plated = plate(risotto, parsley) 2min
+serve plated "Mushroom risotto"

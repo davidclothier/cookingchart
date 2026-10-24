@@ -1,0 +1,134 @@
+{
+  "lang": "es",
+  "cuisine": null,
+  "plan": null,
+  "cooks": null,
+  "burners": null,
+  "packs": [
+    "pastry"
+  ],
+  "ingredients": [
+    {
+      "id": "masa",
+      "quantity": 1,
+      "unit": "ud"
+    },
+    {
+      "id": "chocolate",
+      "quantity": 200,
+      "unit": "g"
+    }
+  ],
+  "steps": [
+    {
+      "id": "base",
+      "verb": "pastry:laminate",
+      "kind": "prep",
+      "attention": "active",
+      "duration": 20,
+      "durationMin": 20,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "masa",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "Base"
+    },
+    {
+      "id": "crema",
+      "verb": "pastry:temper",
+      "kind": "heat",
+      "attention": "active",
+      "duration": 15,
+      "durationMin": 15,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "chocolate",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "Crema"
+    },
+    {
+      "id": "relleno",
+      "verb": null,
+      "kind": "assemble",
+      "attention": null,
+      "duration": 2,
+      "durationMin": 2,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "crema",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "Relleno"
+    },
+    {
+      "id": "tarta",
+      "verb": "bake",
+      "kind": "oven",
+      "attention": "passive",
+      "duration": 30,
+      "durationMin": 30,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "base",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "relleno",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": null
+    }
+  ],
+  "final": "tarta",
+  "diagnostics": [],
+  "schedule": {
+    "normative": true,
+    "asap": {
+      "total": 50,
+      "starts": {
+        "base": 0,
+        "crema": 0,
+        "relleno": 15,
+        "tarta": 20
+      },
+      "critical": [
+        "base",
+        "tarta"
+      ],
+      "violations": []
+    },
+    "alap": {
+      "total": 50,
+      "starts": {
+        "base": 0,
+        "crema": 3,
+        "relleno": 18,
+        "tarta": 20
+      },
+      "critical": [
+        "base",
+        "tarta"
+      ],
+      "violations": []
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "lang": "en",
+  "cuisine": null,
+  "plan": null,
+  "cooks": null,
+  "burners": null,
+  "packs": [],
+  "ingredients": [
+    {
+      "id": "onion",
+      "quantity": 1,
+      "unit": "pc"
+    },
+    {
+      "id": "wine",
+      "quantity": 100,
+      "unit": "ml"
+    },
+    {
+      "id": "stock",
+      "quantity": 500,
+      "unit": "ml"
+    }
+  ],
+  "steps": [
+    {
+      "id": "hot_stock",
+      "verb": "heat",
+      "kind": "heat",
+      "attention": "passive",
+      "duration": 10,
+      "durationMin": 10,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "stock",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "Hot stock"
+    },
+    {
+      "id": "sauce",
+      "verb": "simmer",
+      "kind": "heat",
+      "attention": "passive",
+      "duration": 30,
+      "durationMin": 30,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "onion",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "wine",
+          "at": 5,
+          "fraction": null
+        },
+        {
+          "ref": "hot_stock",
+          "at": 12,
+          "fraction": null
+        }
+      ],
+      "output": null
+    }
+  ],
+  "final": "sauce",
+  "diagnostics": [],
+  "schedule": {
+    "normative": true,
+    "asap": {
+      "total": 30,
+      "starts": {
+        "hot_stock": 0,
+        "sauce": 0
+      },
+      "critical": [
+        "sauce"
+      ],
+      "violations": []
+    },
+    "alap": {
+      "total": 30,
+      "starts": {
+        "hot_stock": 2,
+        "sauce": 0
+      },
+      "critical": [
+        "sauce"
+      ],
+      "violations": []
+    }
+  }
+}

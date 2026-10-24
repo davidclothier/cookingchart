@@ -1,0 +1,27 @@
+recipe "Country bread"
+description "Lots of total time, very little hands-on time"
+cuisine "Baking"
+servings 8
+cooks 1
+
+ingredients
+  flour        500 g    "Bread flour"
+  water        330 ml
+  yeast        10 g     "Fresh yeast"
+  salt         10 g
+  dusting      1 tbsp   "Flour (for dusting)"
+
+tools
+  bowl, oven, stone, rack
+
+base_dough     = mix(flour, water) in bowl 5min
+hydrated_dough = soak(base_dough) 30min                       # autolyse
+dough          = knead(hydrated_dough, yeast, salt) @intensity:medium 10min
+risen_dough    = proof(dough) 1h30 until "it doubles in size"
+raw_loaf       = shape(risen_dough, dusting) 10min
+proofed_loaf   = proof(raw_loaf) 45min
+hot_oven       "Oven at 230°C" = preheat(oven, stone) @230ºC 40min
+baked_loaf     = bake(proofed_loaf) in hot_oven @230ºC 40min
+bread          = cool(baked_loaf) on rack 30min
+
+serve bread "Country loaf"

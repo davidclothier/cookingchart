@@ -1,0 +1,50 @@
+recipe "Moussaka"
+description "Eggplant, meat and béchamel in three lanes that meet in the baking dish"
+cuisine "Mediterranean"
+servings 6
+cooks 1
+
+ingredients
+  eggplants  3 pcs
+  salt       1 tbsp
+  oil        8 tbsp   "Olive oil"
+  onion      1 pc
+  garlic     2 cloves
+  lamb       600 g    "Ground lamb"
+  tomato     400 g    "Crushed tomato"
+  cinnamon   1 tsp
+  wine       100 ml   "Red wine"
+  butter     60 g
+  flour      60 g
+  milk       600 ml
+  egg        1 pc
+  cheese     80 g     "Grated kefalotyri cheese"
+
+tools
+  pan, casserole, saucepan, baking_dish, oven
+
+block "Eggplant"
+  slices          = cut(eggplants) 5min
+  salted          = rest(slices, salt) 30min
+  fried_eggplant  = fry(salted, oil[3/4]) in pan 20min
+end
+
+block "Meat"
+  chopped  = chop(onion, garlic) 5min
+  soffritto = sweat(chopped, oil[1/4]) in casserole @heat:low 8min
+  ragu     "Lamb ragù" = simmer(soffritto, lamb, tomato, cinnamon) in casserole 40min
+    + wine at 5min
+end
+
+block "Béchamel"
+  roux            = cook(butter, flour) in saucepan 3min
+  bechamel        = cook(roux, milk) in saucepan 10min until "it thickens"
+  final_bechamel  "Béchamel with egg and cheese" = mix(bechamel, egg, cheese[1/2]) 2min keeps 20min
+end
+
+hot_oven       "Oven at 180°C" = preheat(oven) @180ºC 15min
+raw_moussaka   = assemble(fried_eggplant, ragu, final_bechamel, cheese[1/2]) in baking_dish 10min
+baked_moussaka = bake(raw_moussaka) in hot_oven @180ºC 45min until "golden"
+moussaka       = rest(baked_moussaka) 20min
+
+serve moussaka "Moussaka"

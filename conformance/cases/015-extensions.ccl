@@ -1,0 +1,10 @@
+receta "Extensiones"
+usa "pastelería"
+ingredientes
+  masa 1 ud
+  chocolate 200 g
+base = laminar(masa) 20min
+crema = atemperar(chocolate) @x-termometro:31ºC 15min
+relleno = x-zarandear(crema) @tipo:montaje 2min
+tarta = hornear(base, relleno) @180ºC 30min
+servir tarta

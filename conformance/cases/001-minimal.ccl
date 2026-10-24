@@ -1,0 +1,5 @@
+receta "Mínima"
+ingredientes
+  huevos 2 ud
+batidos = batir(huevos) 2min
+servir batidos

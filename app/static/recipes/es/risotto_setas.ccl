@@ -1,0 +1,42 @@
+receta "Risotto de setas"
+descripcion "Un solo cocinero: el risotto pide remover sin parar, así que las setas no pueden saltearse a la vez"
+cocina "Mediterránea"
+raciones 4
+cocineros 1
+plan justo_a_tiempo           # el arroz no puede esperar
+
+ingredientes
+  arroz       320 g     "Arroz arborio"
+  caldo       1,2 l     "Caldo de verduras"
+  cebolla     1 ud
+  ajo         1 diente
+  setas       300 g
+  vino        100 ml    "Vino blanco"
+  aceite      4 cda     "Aceite de oliva"
+  mantequilla 40 g
+  parmesano   60 g
+  sal         al gusto
+  perejil     1 rama
+
+herramientas
+  cazo, cazuela, sartén
+
+caldo_caliente "Caldo caliente" = calentar(caldo) en cazo 10min desatendido
+picado         "Cebolla y ajo picados" = picar(cebolla, ajo) 5min
+setas_limpias  = cortar(setas) 5min
+
+bloque "Setas"
+  setas_salteadas = saltear(setas_limpias, aceite[1/2], sal) en sartén @fuego:alto 6min
+fin
+
+bloque "Risotto"
+  sofrito         = pochar(picado, aceite[1/2]) en cazuela @fuego:medio 5min
+  arroz_nacarado  = nacarar(sofrito, arroz) en cazuela 2min
+  arroz_meloso    = cocer(arroz_nacarado, vino) en cazuela @fuego:medio 18min atendido hasta "esté al dente" sin espera
+    + caldo_caliente a los 2min
+  risotto         = mantecar(arroz_meloso, mantequilla, parmesano) 2min
+    + setas_salteadas a los 1min
+fin
+
+emplatado = emplatar(risotto, perejil) 2min
+servir emplatado "Risotto de setas"

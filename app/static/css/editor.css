@@ -1,0 +1,63 @@
+/* SPDX-License-Identifier: Apache-2.0 · Copyright 2025-2026 David Clothier */
+/* Editor CCL */
+
+.code-editor {
+  display: flex;
+  height: min(72vh, 760px);
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  line-height: 20px;
+}
+.code-editor .gutter {
+  flex: none;
+  min-width: 3em;
+  padding: 10px 8px 10px 0;
+  text-align: right;
+  color: #a8a29e;
+  background: #fafaf9;
+  border-right: 1px solid #e7e5e4;
+  overflow: hidden;
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+}
+.code-editor .gutter div.err { color: #dc2626; font-weight: 700; }
+.code-editor .gutter div.warn { color: #d97706; font-weight: 700; }
+.code-area { position: relative; flex: 1; min-width: 0; }
+.code-area pre,
+.code-area textarea {
+  position: absolute; inset: 0;
+  margin: 0; padding: 10px 12px;
+  border: 0; outline: none;
+  font: inherit; line-height: inherit; letter-spacing: 0;
+  white-space: pre; overflow: auto;
+  tab-size: 2;
+}
+.code-area pre { pointer-events: none; color: #292524; overflow: hidden; }
+.code-area textarea {
+  resize: none; background: transparent;
+  color: transparent; caret-color: #1c1917;
+}
+.code-area textarea::selection { background: rgb(249 115 22 / 0.25); color: transparent; }
+
+.tk-comment { color: #a8a29e; font-style: italic; }
+.tk-string  { color: #0f766e; }
+.tk-kw      { color: #7c3aed; font-weight: 600; }
+.tk-mod     { color: #7c3aed; }
+.tk-verb    { color: #c2410c; font-weight: 600; }
+.tk-verb-unknown { color: #c2410c; text-decoration: underline wavy #f59e0b; text-underline-offset: 3px; }
+.tk-out     { color: #a16207; font-weight: 600; }
+.tk-ing     { color: #15803d; }
+.tk-mid     { color: #a16207; }
+.tk-tool    { color: #475569; text-decoration: underline dotted #94a3b8; text-underline-offset: 3px; }
+.tk-dur     { color: #1d4ed8; }
+.tk-param   { color: #be185d; }
+.tk-num     { color: #1d4ed8; }
+.tk-plus    { color: #c2410c; font-weight: 700; }
+.tk-errline { background: rgb(254 226 226 / 0.7); }
+
+#diagnostics li { cursor: pointer; }
+#help code { font-family: ui-monospace, Menlo, monospace; font-size: 12px; background: #f5f5f4; padding: 1px 4px; border-radius: 3px; }
+#help pre { font-family: ui-monospace, Menlo, monospace; font-size: 12px; background: #fafaf9; border: 1px solid #e7e5e4; border-radius: 8px; padding: 8px 10px; overflow-x: auto; }
+
+.embed-tabs button[aria-selected="true"] { background: #1c1917; color: #fff; }
+.embed-tabs button[aria-selected="false"] { background: #f5f5f4; color: #44403c; }

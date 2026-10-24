@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block main_class %}max-w-[1800px] mx-auto px-4 sm:px-6 py-6{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ asset('/static/css/recipe-chart.css') }}">
+<link rel="stylesheet" href="{{ asset('/static/css/editor.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+    <div>
+        <h1 class="text-2xl font-bold text-stone-900" data-i18n="editor.title"></h1>
+        <p class="text-sm text-stone-500" data-i18n="editor.lead"></p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 text-sm">
+        <label for="examples" class="text-stone-600" data-i18n="editor.example"></label>
+        <select id="examples" class="px-2 py-1.5 border border-stone-300 rounded-lg bg-white"></select>
+        <button id="btn-ai" class="px-3 py-1.5 rounded-lg border border-violet-300 bg-violet-50 text-violet-800 hover:bg-violet-100" data-i18n="editor.ai"></button>
+        <button id="btn-share" class="px-3 py-1.5 rounded-lg border border-stone-300 bg-white hover:bg-stone-100" data-i18n="editor.share"></button>
+        <button id="btn-download" class="px-3 py-1.5 rounded-lg border border-stone-300 bg-white hover:bg-stone-100" data-i18n="editor.download"></button>
+        <button id="btn-svg" class="px-3 py-1.5 rounded-lg border border-stone-300 bg-white hover:bg-stone-100" data-i18n="editor.svg"></button>
+        <button id="btn-embed" class="px-3 py-1.5 rounded-lg border border-orange-300 bg-orange-50 text-orange-800 hover:bg-orange-100" data-i18n="editor.embed"></button>
+        <button id="btn-help" class="px-3 py-1.5 rounded-lg border border-stone-300 bg-white hover:bg-stone-100" aria-expanded="false" data-i18n="editor.help"></button>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-[minmax(420px,5fr)_7fr] gap-4 items-start">
+    <section class="flex flex-col gap-3 min-w-0">
+        <div class="code-editor border border-stone-300 rounded-xl bg-white overflow-hidden">
+            <div class="gutter" id="gutter" aria-hidden="true"></div>
+            <div class="code-area">
+                <pre class="code-highlight" id="highlight" aria-hidden="true"></pre>
+                <textarea id="source" spellcheck="false" autocapitalize="off" autocomplete="off" data-i18n-aria="editor.aria"></textarea>
+            </div>
+        </div>
+        <ul id="diagnostics" class="text-sm space-y-1"></ul>
+        <div id="help" class="hidden bg-white border border-stone-200 rounded-xl p-4 text-sm text-stone-700"></div>
+    </section>
+
+    <section class="bg-white rounded-xl border border-stone-200 shadow-sm min-w-0">
+        <div class="flex flex-wrap items-start justify-between gap-3 p-4 border-b border-stone-100">
+            <div class="min-w-0">
+                <h2 id="recipe-name" class="text-xl font-bold text-stone-900 truncate"></h2>
+                <p id="recipe-meta" class="text-sm text-stone-500"></p>
+            </div>
+            <div class="seg inline-flex rounded-lg border border-stone-300 overflow-hidden text-sm" role="group" data-i18n-aria="mode.group">
+                <button data-mode="asap" class="px-3 py-1.5" data-i18n="mode.asap" data-i18n-title="mode.asap.title"></button>
+                <button data-mode="alap" class="px-3 py-1.5 border-l border-stone-300" data-i18n="mode.alap" data-i18n-title="mode.alap.title"></button>
+            </div>
+        </div>
+        <dl id="stats" class="grid grid-cols-3 lg:grid-cols-6 gap-px bg-stone-100 border-b border-stone-100"></dl>
+        <div id="chart-wrap" class="relative">
+            <div id="chart" class="p-3" style="min-height: 300px;"></div>
+            <div id="stale" class="hidden absolute top-2 right-3 text-xs bg-red-50 text-red-700 border border-red-200 rounded px-2 py-1" data-i18n="editor.stale"></div>
+        </div>
+        <div data-views class="border-t border-stone-100">
+            <div class="view-tabs flex gap-1 px-4 pt-2 border-b border-stone-100 overflow-x-auto" role="tablist">
+                <button role="tab" data-view="method" aria-selected="true" data-i18n="views.method"></button>
+                <button role="tab" data-view="plan" aria-selected="false" data-i18n="views.plan"></button>
+            </div>
+            <div id="method" class="p-4" role="tabpanel" data-panel="method"></div>
+            <div id="plan" class="p-4" role="tabpanel" data-panel="plan" hidden></div>
+        </div>
+    </section>
+</div>
+
+<dialog id="ai-dialog" class="rounded-xl p-0 w-[min(760px,92vw)] backdrop:bg-black/40" data-prompt="{{ asset('/static/ai/ccl-prompt.md') }}">
+    <div class="p-5">
+        <div class="flex justify-between items-center mb-2">
+            <h2 class="text-lg font-bold text-stone-900" data-i18n="ai.title"></h2>
+            <button id="ai-close" class="text-stone-400 hover:text-stone-700 text-xl leading-none" aria-label="Close">×</button>
+        </div>
+        <p class="text-sm text-stone-600 mb-4" data-i18n="ai.intro"></p>
+        <label for="ai-recipe" class="block text-sm font-semibold text-stone-800 mb-1" data-i18n="ai.step1"></label>
+        <textarea id="ai-recipe" class="w-full h-32 text-sm border border-stone-300 rounded-lg p-3"></textarea>
+        <div class="flex flex-wrap items-center gap-2 mt-2 text-sm">
+            <label for="ai-lang" class="text-stone-600" data-i18n="ai.lang"></label>
+            <select id="ai-lang" class="px-2 py-1 border border-stone-300 rounded-lg bg-white">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+            </select>
+            <button id="ai-copy" class="px-4 py-1.5 rounded-lg bg-stone-900 text-white" data-i18n="ai.copy"></button>
+        </div>
+        <label for="ai-answer" class="block text-sm font-semibold text-stone-800 mt-5 mb-1" data-i18n="ai.step2"></label>
+        <textarea id="ai-answer" class="w-full h-40 font-mono text-xs border border-stone-300 rounded-lg p-3 bg-stone-50" spellcheck="false"></textarea>
+        <div class="flex justify-end mt-3">
+            <button id="ai-load" class="px-4 py-1.5 rounded-lg bg-violet-700 text-white text-sm" data-i18n="ai.load"></button>
+        </div>
+    </div>
+</dialog>
+
+<dialog id="embed-dialog" class="rounded-xl p-0 w-[min(760px,92vw)] backdrop:bg-black/40">
+    <div class="p-5">
+        <div class="flex justify-between items-center mb-2">
+            <h2 class="text-lg font-bold text-stone-900" data-i18n="editor.embedTitle"></h2>
+            <button id="embed-close" class="text-stone-400 hover:text-stone-700 text-xl leading-none" aria-label="Close">×</button>
+        </div>
+        <p class="text-sm text-stone-600 mb-3" data-i18n="editor.embedHelp"></p>
+        <div class="embed-tabs flex gap-1 mb-2 text-sm" role="tablist">
+            <button data-tab="script" class="px-3 py-1 rounded-md">&lt;script&gt;</button>
+            <button data-tab="markdown" class="px-3 py-1 rounded-md">Markdown</button>
+            <button data-tab="iframe" class="px-3 py-1 rounded-md">&lt;iframe&gt;</button>
+        </div>
+        <textarea id="embed-code" readonly class="w-full h-64 font-mono text-xs border border-stone-300 rounded-lg p-3 bg-stone-50"></textarea>
+        <div class="flex justify-end mt-3">
+            <button id="embed-copy" class="px-4 py-1.5 rounded-lg bg-stone-900 text-white text-sm" data-i18n="editor.copy"></button>
+        </div>
+    </div>
+</dialog>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ asset('/static/js/cooking-lang.js') }}"></script>
+<script src="{{ asset('/static/js/cooking-packs.js') }}"></script>
+<script src="{{ asset('/static/js/recipe-model.js') }}"></script>
+<script src="{{ asset('/static/js/recipe-chart.js') }}"></script>
+<script src="{{ asset('/static/js/recipe-text.js') }}"></script>
+<script src="{{ asset('/static/js/editor.js') }}"></script>
+{% endblock %}

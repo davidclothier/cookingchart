@@ -1,0 +1,85 @@
+{
+  "lang": "en",
+  "cuisine": null,
+  "plan": null,
+  "cooks": null,
+  "burners": null,
+  "packs": [],
+  "ingredients": [
+    {
+      "id": "dough",
+      "quantity": 1,
+      "unit": "pc"
+    }
+  ],
+  "steps": [
+    {
+      "id": "hot_oven",
+      "verb": "preheat",
+      "kind": "oven",
+      "attention": "passive",
+      "duration": 20,
+      "durationMin": 20,
+      "keep": null,
+      "tools": [
+        "oven"
+      ],
+      "inputs": [],
+      "output": "Oven at 220°C"
+    },
+    {
+      "id": "bread",
+      "verb": "bake",
+      "kind": "oven",
+      "attention": "passive",
+      "duration": 35,
+      "durationMin": 35,
+      "keep": null,
+      "tools": [
+        "oven"
+      ],
+      "inputs": [
+        {
+          "ref": "dough",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "hot_oven",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": null
+    }
+  ],
+  "final": "bread",
+  "diagnostics": [],
+  "schedule": {
+    "normative": false,
+    "asap": {
+      "total": 55,
+      "starts": {
+        "hot_oven": 0,
+        "bread": 20
+      },
+      "critical": [
+        "hot_oven",
+        "bread"
+      ],
+      "violations": []
+    },
+    "alap": {
+      "total": 55,
+      "starts": {
+        "hot_oven": 0,
+        "bread": 20
+      },
+      "critical": [
+        "hot_oven",
+        "bread"
+      ],
+      "violations": []
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ asset('/static/css/recipe-chart.css') }}">
+{% endblock %}
+
+{% block content %}
+<header class="mb-8">
+    <h1 class="text-3xl font-bold text-stone-900 tracking-tight">{{ t('nav.gallery') }}</h1>
+    <p class="mt-2 text-lg text-stone-600 max-w-3xl" data-i18n="home.lead"></p>
+</header>
+
+<section class="mb-6">
+    <h2 class="text-xs font-semibold uppercase tracking-wider text-stone-500 mb-3" data-i18n="home.gallery"></h2>
+    <div id="cuisines" class="flex flex-wrap gap-2 mb-4 text-sm" role="group"></div>
+    <div id="gallery" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+</section>
+
+<section class="bg-white rounded-xl border border-stone-200 shadow-sm">
+    <div class="flex flex-wrap items-start justify-between gap-4 p-5 border-b border-stone-100">
+        <div>
+            <h2 id="recipe-name" class="text-2xl font-bold text-stone-900"></h2>
+            <p id="recipe-desc" class="text-stone-500 text-sm mt-1"></p>
+        </div>
+        <div class="flex flex-col items-end gap-2">
+            <div class="seg inline-flex rounded-lg border border-stone-300 overflow-hidden text-sm" role="group" data-i18n-aria="mode.group">
+                <button data-mode="asap" class="px-3 py-1.5" data-i18n="mode.asap" data-i18n-title="mode.asap.title"></button>
+                <button data-mode="alap" class="px-3 py-1.5 border-l border-stone-300" data-i18n="mode.alap" data-i18n-title="mode.alap.title"></button>
+            </div>
+            <div id="legend" class="flex flex-wrap justify-end gap-x-3 gap-y-1 text-xs text-stone-600"></div>
+        </div>
+    </div>
+
+    <dl id="stats" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-px bg-stone-100 border-b border-stone-100"></dl>
+
+    <div id="chart" class="p-3" style="min-height: 320px;"></div>
+
+    <p class="px-5 pb-4 text-xs text-stone-500" data-i18n="home.note"></p>
+</section>
+
+<section class="mt-8 bg-white rounded-xl border border-stone-200 shadow-sm" data-views>
+    <div class="view-tabs flex gap-1 px-4 pt-3 border-b border-stone-100 overflow-x-auto" role="tablist">
+        <button role="tab" data-view="method" aria-selected="true" data-i18n="views.method"></button>
+        <button role="tab" data-view="plan" aria-selected="false" data-i18n="views.plan"></button>
+    </div>
+    <div id="method" class="p-5" role="tabpanel" data-panel="method"></div>
+    <div id="plan" class="p-5" role="tabpanel" data-panel="plan" hidden></div>
+</section>
+
+<p class="mt-6 text-sm text-stone-500">
+    <span data-i18n-html="home.footer"></span>
+    <a id="edit-link" href="/editor" class="text-orange-600 underline font-medium" data-i18n="home.edit"></a>
+</p>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ asset('/static/js/cooking-lang.js') }}"></script>
+<script src="{{ asset('/static/js/cooking-packs.js') }}"></script>
+<script src="{{ asset('/static/js/recipe-model.js') }}"></script>
+<script src="{{ asset('/static/js/recipe-chart.js') }}"></script>
+<script src="{{ asset('/static/js/recipe-text.js') }}"></script>
+<script src="{{ asset('/static/js/app.js') }}"></script>
+{% endblock %}

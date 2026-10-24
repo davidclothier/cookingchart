@@ -1,0 +1,34 @@
+recipe "Paella valenciana"
+description "Everything happens in the same pan: one long line that ingredients keep flowing into"
+cuisine "Mediterranean"
+servings 4
+cooks 1
+
+ingredients
+  chicken   500 g
+  rabbit    400 g
+  oil       6 tbsp     "Olive oil"
+  beans     200 g      "Flat green beans"
+  garrofon  150 g      "Garrofó beans"
+  tomato    1 pc
+  paprika   1 tsp      "Sweet paprika"
+  water     1.5 l
+  saffron   1 pinch
+  salt      to taste
+  rice      400 g      "Bomba rice"
+  rosemary  1 sprig
+
+tools
+  paella_pan
+
+grated_tomato = grate(tomato) 2min
+browned_meat  = brown(chicken, rabbit, oil) in paella_pan @heat:medium 15min
+sofrito       = sweat(browned_meat, beans, garrofon) in paella_pan 8min
+  + grated_tomato at 5min
+  + paprika at 7min
+stock         = boil(sofrito, water, saffron, salt) in paella_pan @heat:high 30min
+cooked_rice   = boil(stock, rice) in paella_pan 17-18min until "the stock is absorbed" no wait
+  + rosemary at 12min
+paella        = rest(cooked_rice) 5min @covered
+
+serve paella "Paella valenciana"

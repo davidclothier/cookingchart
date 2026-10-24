@@ -1,0 +1,122 @@
+{
+  "lang": "es",
+  "cuisine": null,
+  "plan": null,
+  "cooks": null,
+  "burners": null,
+  "packs": [],
+  "ingredients": [
+    {
+      "id": "leche",
+      "quantity": 500,
+      "unit": "ml"
+    },
+    {
+      "id": "harina",
+      "quantity": 50,
+      "unit": "g"
+    },
+    {
+      "id": "carne",
+      "quantity": 500,
+      "unit": "g"
+    }
+  ],
+  "steps": [
+    {
+      "id": "bechamel",
+      "verb": "cook",
+      "kind": "heat",
+      "attention": "active",
+      "duration": 10,
+      "durationMin": 10,
+      "keep": 15,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "leche",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "harina",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "Bechamel"
+    },
+    {
+      "id": "salsa",
+      "verb": "simmer",
+      "kind": "heat",
+      "attention": "passive",
+      "duration": 60,
+      "durationMin": 60,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "carne",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "Salsa"
+    },
+    {
+      "id": "plato",
+      "verb": "assemble",
+      "kind": "assemble",
+      "attention": "active",
+      "duration": 5,
+      "durationMin": 5,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "bechamel",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "salsa",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": null
+    }
+  ],
+  "final": "plato",
+  "diagnostics": [],
+  "schedule": {
+    "normative": true,
+    "asap": {
+      "total": 65,
+      "starts": {
+        "bechamel": 35,
+        "salsa": 0,
+        "plato": 60
+      },
+      "critical": [
+        "salsa",
+        "plato"
+      ],
+      "violations": []
+    },
+    "alap": {
+      "total": 65,
+      "starts": {
+        "bechamel": 50,
+        "salsa": 0,
+        "plato": 60
+      },
+      "critical": [
+        "salsa",
+        "plato"
+      ],
+      "violations": []
+    }
+  }
+}

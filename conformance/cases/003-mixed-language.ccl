@@ -1,0 +1,8 @@
+# Las palabras clave y los verbos pueden mezclarse; manda la mayoría
+recipe "Mixta"
+ingredientes
+  harina 100 g
+  agua 60 ml
+masa = mezclar(harina, water_typo) 3min
+pan = bake(masa) en horno @200ºC 20min
+servir pan

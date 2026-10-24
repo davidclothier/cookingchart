@@ -1,0 +1,21 @@
+recipe "Spaghetti with tomato sauce"
+
+ingredients
+  pasta   200 g
+  water   2 l
+  salt    1 tbsp
+  garlic  2 cloves
+  oil     3 tbsp
+  tomato  400 g
+
+boiling_water = boil(water) 8min
+cooked_pasta  = boil(pasta, boiling_water, salt) 10min
+spaghetti     = drain(cooked_pasta) 1min
+
+chopped_garlic = chop(garlic) 3min
+soffritto      = sweat(chopped_garlic, oil) 5min
+sauce          = simmer(soffritto, tomato) 15min
+
+dish = mix(spaghetti, sauce) 2min
+
+serve dish

@@ -1,0 +1,27 @@
+receta "Pan casero"
+descripcion "Mucho tiempo total, muy poco tiempo de manos"
+cocina "Panadería"
+raciones 8
+cocineros 1
+
+ingredientes
+  harina             500 g    "Harina de fuerza"
+  agua               330 ml
+  levadura           10 g     "Levadura fresca"
+  sal                10 g
+  harina_espolvorear 1 cda    "Harina (espolvorear)"
+
+herramientas
+  bol, horno, piedra, rejilla
+
+masa_base      = mezclar(harina, agua) en bol 5min
+masa_hidratada = hidratar(masa_base) 30min                       # autólisis
+masa           = amasar(masa_hidratada, levadura, sal) @intensidad:media 10min
+masa_levada    = levar(masa) 1h30 hasta "doble su volumen"
+hogaza_cruda   = formar(masa_levada, harina_espolvorear) 10min
+hogaza_lista   "Hogaza fermentada" = levar(hogaza_cruda) 45min
+horno_caliente "Horno a 230°C" = precalentar(horno, piedra) @230ºC 40min
+pan_horneado   = hornear(hogaza_lista) en horno_caliente @230ºC 40min
+pan            = enfriar(pan_horneado) en rejilla 30min
+
+servir pan "Hogaza de pan"

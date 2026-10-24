@@ -1,0 +1,114 @@
+{
+  "lang": "en",
+  "cuisine": null,
+  "plan": null,
+  "cooks": 1,
+  "burners": null,
+  "packs": [],
+  "ingredients": [
+    {
+      "id": "rice",
+      "quantity": 300,
+      "unit": "g"
+    },
+    {
+      "id": "mushrooms",
+      "quantity": 300,
+      "unit": "g"
+    }
+  ],
+  "steps": [
+    {
+      "id": "creamy",
+      "verb": "boil",
+      "kind": "heat",
+      "attention": "active",
+      "duration": 18,
+      "durationMin": 18,
+      "keep": 0,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "rice",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "Creamy"
+    },
+    {
+      "id": "sauteed",
+      "verb": "saute",
+      "kind": "heat",
+      "attention": "active",
+      "duration": 10,
+      "durationMin": 10,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "mushrooms",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "Sauteed"
+    },
+    {
+      "id": "risotto",
+      "verb": "finish",
+      "kind": "assemble",
+      "attention": "active",
+      "duration": 2,
+      "durationMin": 2,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "creamy",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "sauteed",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": null
+    }
+  ],
+  "final": "risotto",
+  "diagnostics": [],
+  "schedule": {
+    "normative": false,
+    "asap": {
+      "total": 30,
+      "starts": {
+        "creamy": 10,
+        "sauteed": 0,
+        "risotto": 28
+      },
+      "critical": [
+        "creamy",
+        "sauteed",
+        "risotto"
+      ],
+      "violations": []
+    },
+    "alap": {
+      "total": 30,
+      "starts": {
+        "creamy": 10,
+        "sauteed": 0,
+        "risotto": 28
+      },
+      "critical": [
+        "creamy",
+        "sauteed",
+        "risotto"
+      ],
+      "violations": []
+    }
+  }
+}

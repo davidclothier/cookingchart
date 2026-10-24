@@ -1,0 +1,40 @@
+recipe "Lasagna bolognese"
+description "Two sauces in parallel that come together at assembly"
+cuisine "Mediterranean"
+servings 6
+cooks 1
+
+ingredients
+  onion      1 pc
+  carrot     1 pc
+  celery     1 stalk
+  beef       500 g    "Ground beef"
+  tomato     800 g    "Crushed tomato"
+  wine       100 ml   "Red wine"
+  butter     50 g
+  flour      50 g
+  milk       500 ml
+  sheets     250 g    "Lasagna sheets"
+  cheese     200 g    "Grated cheese"
+
+tools
+  pan, saucepan, dish, oven
+
+block "Bolognese"
+  vegetables   "Chopped vegetables" = chop(onion, carrot, celery) 10min
+  soffritto    = sweat(vegetables) in pan @heat:low 10min
+  browned_beef = brown(soffritto, beef) in pan @heat:high 15min
+  bolognese    "Bolognese sauce" = simmer(browned_beef, tomato) in pan @heat:low 45min
+    + wine at 5min
+end
+
+block "Béchamel"
+  roux       = cook(butter, flour) in saucepan @heat:medium 5min
+  bechamel   "Béchamel" = cook(roux, milk) in saucepan @heat:medium 8-10min until "it thickens" keeps 30min
+end
+
+hot_oven       "Oven at 180°C" = preheat(oven) @180ºC 15min
+raw_lasagna    "Assembled lasagna" = assemble(bolognese, bechamel, sheets, cheese) in dish 15min
+lasagna        = bake(raw_lasagna) in hot_oven @180ºC 40min until "golden"
+
+serve lasagna "Lasagna bolognese"

@@ -1,0 +1,5 @@
+recipe "Minimal"
+ingredients
+  eggs 2 pcs
+beaten = beat(eggs) 2min
+serve beaten

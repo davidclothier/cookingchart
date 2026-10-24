@@ -1,0 +1,34 @@
+recipe "Spaghetti with tomato sauce"
+description "The full recipe from the tutorial"
+servings 2
+cooks 1
+schedule just_in_time
+
+ingredients
+  pasta     200 g     "Spaghetti"
+  water     2 l
+  salt      1 tbsp
+  garlic    2 cloves
+  oil       3 tbsp    "Olive oil"
+  tomato    400 g     "Crushed tomato"
+  basil     6 leaves
+  parmesan  40 g
+
+tools
+  pot, pan, colander
+
+boiling_water = boil(water) in pot 8min
+cooked_pasta  = boil(pasta, boiling_water, salt) in pot 9-11min until "al dente" no wait
+spaghetti     = drain(cooked_pasta) with colander 1min no wait
+
+chopped_garlic = chop(garlic) 3min
+soffritto      = sweat(chopped_garlic, oil[2/3]) in pan @heat:low 5min
+sauce "Tomato sauce" = simmer(soffritto, tomato) in pan @heat:medium 15min
+  + basil at 12min
+
+cheese = grate(parmesan) 2min
+
+dish "Spaghetti with tomato sauce" = mix(spaghetti, sauce, oil[1/3]) in pan 2min
+  + cheese at 1min
+
+serve dish

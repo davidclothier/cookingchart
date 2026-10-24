@@ -1,0 +1,97 @@
+{# Textos de la portada en español. La maquetación está en home.html. #}
+
+{% set eyebrow = 'Un estándar abierto · v0.2' %}
+{% set hero_title = 'Una receta no es una lista. Es un <em>río</em>.' %}
+{% set hero_lead = 'Escribe la receta como texto y <strong>Cooking Chart la dibuja sola</strong>: cuánto dura cada paso, qué se hace a la vez, cuándo entra cada ingrediente y cuánto rato tienes las manos ocupadas.' %}
+{% set cta_editor = 'Abrir el editor' %}
+{% set cta_gallery = 'Ver recetas' %}
+{% set cta_tutorial = 'Tutorial en 8 pasos' %}
+{% set cta_spec = 'Leer la especificación' %}
+{% set cta_embed = 'Incrustar en tu web' %}
+{% set write_this = 'Ver el texto que la dibuja' %}
+{% set plate_no = 'Lámina I' %}
+{% set plate_title = 'Lasaña boloñesa.' %}
+{% set plate_caption = 'La boloñesa y la bechamel corren en paralelo y desembocan en el montaje.' %}
+{% set ch_problem = 'El problema' %}
+{% set ch_read = 'Cómo se lee' %}
+{% set ch_writers = 'Para quien escribe recetas' %}
+{% set ch_pieces = 'El estándar' %}
+{% set ch_signatures = 'Firmas' %}
+{% set ch_open = 'Abierto' %}
+{% set get_this = '…y obtienes esto' %}
+
+{% set hero_ccl %}
+receta "Lasaña boloñesa"
+cocineros 1
+
+ingredientes
+  carne        500 g
+  tomate       800 g
+  leche        500 ml
+  harina       50 g
+  mantequilla  50 g
+  placas       250 g
+
+boloñesa = guisar(carne, tomate) 45min
+roux     = cocinar(mantequilla, harina) 5min
+bechamel = cocinar(roux, leche) 10min aguanta 30min
+lasaña   = montar(boloñesa, bechamel, placas) 15min
+horneada = hornear(lasaña) @180ºC 40min
+
+servir horneada
+{% endset %}
+
+{% set problem_title = 'Los buenos cocineros <em>no leen</em> las recetas de arriba abajo.' %}
+{% set problem_lead = 'Las recetas se escriben como una secuencia de pasos, pero cocinar no funciona así. Mientras algo hierve, picas otra cosa; una salsa tiene que estar lista justo cuando la necesitas; el horno se enciende antes de tiempo. Eso que un buen cocinero lleva en la cabeza, una lista no lo cuenta.' %}
+{% set problems = [
+    ('El tiempo', 'Cuánto dura cada paso y cuánto la receta entera, dibujado a escala: un paso de 45 minutos ocupa nueve veces más que uno de 5.'),
+    ('El paralelismo', 'Qué puedes hacer a la vez, qué depende de qué y qué marca el ritmo. La ruta crítica aparece sola.'),
+    ('Tus manos', 'Qué pasos te tienen ocupado y cuáles avanzan solos: el horno, un guiso, un reposo. Y cuánto rato libre te deja la receta.'),
+] %}
+
+{% set read_title = 'Una gramática visual, <em>siempre la misma</em>.' %}
+{% set read_lead = 'El tiempo avanza de izquierda a derecha. Cada preparación corre en su carril y todo desemboca en el plato, como un río.' %}
+{% set legend = [
+    ('bar', 'Proceso', 'Una barra por paso, del minuto en que empieza al que termina. El color dice el tipo: preparación, fuego, horno, reposo o montaje.'),
+    ('hatched', 'Desatendido', 'Rayado: el paso avanza solo y tú puedes hacer otra cosa.'),
+    ('ingredient', 'Ingrediente', 'Cae encima del paso que lo usa, en el minuto exacto en que entra.'),
+    ('band', 'Lo que llevas preparado', 'La banda que sale de cada paso. Engorda a medida que acumula ingredientes.'),
+    ('tributary', 'Afluente', 'Una preparación paralela que desemboca en otra: la bechamel en el montaje.'),
+    ('wait', 'Espera', 'Discontinuo: algo ya listo que espera su turno. En rojo, si espera más de lo que aguanta.'),
+    ('critical', 'Ruta crítica', 'La línea blanca bajo los pasos que marcan el tiempo total. Si se retrasan, se retrasa el plato.'),
+    ('hands', 'Manos', 'Bajo el gráfico, cuándo estás ocupado. En rojo, si harían falta más manos de las que hay.'),
+    ('dish', 'Plato', 'Donde todo termina, con el tiempo total.'),
+] %}
+
+{% set pieces_title = 'Tres piezas, <em>un estándar</em>.' %}
+{% set pieces = [
+    ('Un lenguaje: CCL', 'Cada paso es una línea: resultado = verbo(ingredientes) duración. Las dependencias, el paralelismo y los horarios se deducen solos. En español y en inglés.', 'spec', 'Especificación'),
+    ('Un gráfico y dos textos', 'Del mismo texto salen el gráfico, sin cruces de líneas, el plan de trabajo con sus minutos y el modo de elaboración, en frases enlazadas. Nadie escribe ni coloca nada a mano.', 'gallery', 'Galería'),
+    ('Incrustable', 'Una línea de código y tu receta aparece dibujada en tu blog, en tu web o en un documento Markdown.', 'embed', 'Cómo incrustarlo'),
+] %}
+
+{% set signature_title = 'Cada receta tiene <em>su firma</em>.' %}
+{% set writers_title = 'Si escribes recetas, <em>esto es para ti</em>.' %}
+{% set writers_lead = 'En un blog, en tu web o en un cuaderno propio: Cooking Chart convierte tus recetas en algo que se entiende de un vistazo, sin cambiar tu forma de trabajar.' %}
+{% set writers = [
+    ('En tu blog o tu web', 'Una línea de código y la receta aparece dibujada, con el modo de elaboración y el plan de trabajo si los quieres. Los buscadores la reciben en el formato que entienden. Funciona en WordPress, Hugo, Astro o cualquier página que admita HTML o Markdown.', 'embed', 'Cómo incrustarla'),
+    ('Para tu propio recetario', 'Tus recetas como texto plano, tuyas para siempre. Ábrelas en el editor, mira cuándo empezar cada cosa y compártelas con un enlace.', 'editor', 'Abrir el editor'),
+    ('Sin aprender el lenguaje', 'Pega tu receta en el editor, copia las instrucciones para tu IA (ChatGPT, Gemini, Claude…) y vuelve con la receta ya escrita en CCL, lista para dibujarse.', 'editor', 'Convertir con tu IA'),
+] %}
+{% set signature_lead = 'El mismo gráfico, sin texto y a la misma escala. Una tortilla es un trazo corto; un pan, una línea larga casi toda rayada: mucho tiempo, poco trabajo.' %}
+{% set signatures = [
+    ('tortilla_francesa', 'Tortilla francesa', '8 min', 13),
+    ('arroz_con_pollo', 'Arroz con pollo', '30 min', 21),
+    ('risotto_setas', 'Risotto de setas', '45 min', 26),
+    ('lasagna_bolognesa', 'Lasaña boloñesa', '2 h 15', 57),
+    ('pan_casero', 'Pan casero', '4 h 20', 100),
+] %}
+
+{% set open_title = 'Abierto <em>de verdad</em>.' %}
+{% set open_lead = 'Cooking Chart es un estándar, no un producto. Cualquiera puede escribir recetas, construir herramientas o ampliar el vocabulario.' %}
+{% set open_points = [
+    ('Especificación libre', 'CC BY 4.0: úsala, tradúcela o amplíala citando el origen.'),
+    ('Código libre', 'La implementación de referencia es Apache 2.0.'),
+    ('Batería de conformidad', 'Casos de prueba para que cualquiera pueda escribir su propio parser y demostrar que es compatible.'),
+    ('Extensible', 'Paquetes de vocabulario (pastelería, robots de cocina…) y extensiones privadas con el prefijo x-.'),
+] %}

@@ -1,0 +1,9 @@
+receta "Fracciones"
+ingredientes
+  aceite 4 cda
+  ajo 2 dientes
+  pan 4 rebanada
+ajo_frito = freír(ajo, aceite[1/2]) 3min
+tostadas = tostar(pan, aceite[25%]) 5min
+plato = montar(ajo_frito, tostadas) 1min
+servir plato

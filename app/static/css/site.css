@@ -1,0 +1,88 @@
+/* SPDX-License-Identifier: Apache-2.0 · Copyright 2025-2026 David Clothier */
+
+/* Estilo "recetario": papel, tinta y una serif de libro de cocina */
+:root {
+  --paper: #f4eee3; --paper-light: #fbf8f2; --paper-deep: #ebe3d4;
+  --ink: #221c15; --ink-soft: #5c5246; --rule: #d8ccb8;
+  --heat: #ea580c; --prep: #0e7490; --assemble: #7c3aed;
+  --display: "Fraunces", Georgia, serif;
+  --text: "Newsreader", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+body { font-family: var(--text); font-size: 18px; background: var(--paper); color: var(--ink); }
+/* Grano de papel muy sutil */
+body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .35; mix-blend-mode: multiply;
+  background-image: radial-gradient(rgba(120,100,70,.08) 1px, transparent 1px); background-size: 3px 3px; }
+code, pre, kbd, .font-mono { font-family: var(--mono); }
+h1, h2, h3, .font-display { font-family: var(--display); letter-spacing: -.01em; }
+h1, h2 { font-weight: 550 !important; }
+/* Los titulares grandes (portada) son más ligeros y más juntos */
+.hero h1 { font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 400 !important; letter-spacing: -.035em; }
+.chapter h2 { font-variation-settings: "opsz" 96; font-weight: 450 !important; letter-spacing: -.02em; }
+h1 em, h2 em { font-style: italic; font-weight: 300; }
+h1 em { color: var(--heat); }
+
+/* Rótulos y botones: mayúsculas en monoespaciada, como las notas al margen */
+.label { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+.btn-ink, .btn-line { display: inline-block; font-family: var(--mono); font-size: 13px; letter-spacing: .05em; text-transform: uppercase; text-decoration: none; }
+.btn-ink { background: var(--ink); color: var(--paper-light); padding: 13px 20px; border-radius: 2px; }
+.btn-ink:hover { background: #b91c1c; }
+.btn-line { border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+.btn-line:hover { color: var(--heat); }
+
+/* Cabecera tipo portadilla */
+.site-nav { background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--ink); }
+.brand-name { font-family: var(--display); font-weight: 650; font-size: 22px; letter-spacing: -.01em; font-variation-settings: "opsz" 36; }
+.site-links { font-family: var(--mono); font-size: 12px; letter-spacing: .05em; text-transform: uppercase; }
+.nav-link { color: var(--ink-soft); text-decoration: none; }
+.nav-link:hover { color: var(--ink); }
+.nav-link.active { color: var(--ink); text-decoration: underline; text-underline-offset: 6px; }
+.lang-switch { border: 1px solid var(--ink); border-radius: 2px; font-family: var(--mono); font-size: 11.5px; }
+.lang-switch a { color: var(--ink-soft); }
+.lang-switch a.on { background: var(--ink); color: var(--paper-light); }
+.site-footer { border-top: 1px solid var(--ink); font-family: var(--mono); font-size: 12px; letter-spacing: .03em; color: var(--ink-soft); position: relative; }
+.site-footer a:hover { color: var(--ink); }
+main, nav, footer { position: relative; z-index: 1; }
+
+/* El gráfico incrustado se integra en el papel */
+cooking-chart::part(card) { background: var(--paper-light); border-color: var(--rule); border-radius: 4px; }
+.plate cooking-chart::part(card) { border: 0; background: transparent; border-radius: 0; }
+
+/* Bloques de código: papel oscurecido con filete de tinta */
+.code-block {
+  background: var(--paper-deep); color: var(--ink); border-left: 3px solid var(--ink); border-radius: 0;
+  padding: 16px 20px; font-size: 13px; line-height: 1.65; overflow-x: auto;
+}
+:is(.code-block, .spec-prose pre) .k { color: #6d28d9; }      /* palabra clave */
+:is(.code-block, .spec-prose pre) .v { color: #c2410c; }      /* verbo */
+:is(.code-block, .spec-prose pre) .s { color: #15803d; }      /* cadena */
+:is(.code-block, .spec-prose pre) .d { color: #0e7490; }      /* duración, parámetro */
+:is(.code-block, .spec-prose pre) .c { color: #857760; font-style: italic; }
+
+/* Especificación */
+.spec-prose { max-width: 78ch; }
+.spec-prose table { font-size: 0.85em; display: block; overflow-x: auto; }
+.spec-prose pre { font-size: 12.5px; line-height: 1.6; color: var(--ink); background: var(--paper-deep); border-left: 3px solid var(--ink); border-radius: 0; }
+.spec-prose pre code { background: transparent !important; padding: 0 !important; color: inherit !important; font-size: inherit; }
+.spec-prose h2 { scroll-margin-top: 72px; }
+.spec-prose h3 { scroll-margin-top: 72px; }
+.spec-toc a { color: var(--ink-soft); }
+.spec-toc a:hover { color: #ea580c; }
+.spec-toc a.current { color: var(--ink); font-weight: 600; }
+.spec-chart { margin: -0.5em 0 1.75em; }
+.spec-chart-label { font-size: 12px; color: #78716c; margin-bottom: 6px; }
+
+.prose pre.legal, pre.legal { white-space: pre-wrap; font-size: 12.5px; line-height: 1.5; color: var(--ink); background: var(--paper-light); border: 1px solid var(--rule); border-radius: 2px; padding: 20px; }
+
+/* Mientras el componente no está definido, no mostrar la receta en crudo */
+cooking-chart:not(:defined) { display: block; min-height: 120px; color: transparent; overflow: hidden; }
+
+/* Tutorial: líneas nuevas en cada paso */
+.ln-new { display: inline-block; width: calc(100% + 40px); margin: 0 -20px; padding: 0 20px 0 16px;
+          background: rgba(234, 88, 12, 0.10); border-left: 4px solid var(--heat); }
+.tut-code { min-width: max-content; }
+
+/* Pestañas entre gráfico, plan de trabajo y modo de elaboración */
+.view-tabs button { padding: 8px 12px; margin-bottom: -1px; font-family: var(--mono); font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-soft); border-bottom: 2px solid transparent; white-space: nowrap; }
+.view-tabs button:hover { color: var(--ink); }
+.view-tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--ink); }

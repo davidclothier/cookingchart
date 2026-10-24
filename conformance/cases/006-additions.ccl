@@ -1,0 +1,10 @@
+recipe "Additions"
+ingredients
+  onion 1 pc
+  wine 100 ml
+  stock 500 ml
+hot_stock = heat(stock) 10min unattended
+sauce = simmer(onion) 30min
+  + wine at 5min
+  + hot_stock at 12min
+serve sauce

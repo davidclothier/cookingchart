@@ -1,0 +1,170 @@
+{
+  "lang": "es",
+  "cuisine": null,
+  "plan": null,
+  "cooks": null,
+  "burners": null,
+  "packs": [],
+  "ingredients": [
+    {
+      "id": "harina",
+      "quantity": 100,
+      "unit": "g"
+    },
+    {
+      "id": "sal",
+      "quantity": 1,
+      "unit": "pizca"
+    },
+    {
+      "id": "azafrán",
+      "quantity": 3,
+      "unit": "hebras"
+    },
+    {
+      "id": "chile",
+      "quantity": 1,
+      "unit": "ud"
+    }
+  ],
+  "steps": [
+    {
+      "id": "masa",
+      "verb": null,
+      "kind": null,
+      "attention": null,
+      "duration": 2,
+      "durationMin": 2,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "harina",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "sal",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "azafrán",
+          "at": 5,
+          "fraction": null
+        }
+      ],
+      "output": "Masa"
+    },
+    {
+      "id": "pan",
+      "verb": "bake",
+      "kind": "oven",
+      "attention": "passive",
+      "duration": 30,
+      "durationMin": 30,
+      "keep": null,
+      "tools": [
+        "horno_de_leña"
+      ],
+      "inputs": [
+        {
+          "ref": "masa",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "Pan"
+    },
+    {
+      "id": "resto",
+      "verb": "chop",
+      "kind": "prep",
+      "attention": "active",
+      "duration": 1,
+      "durationMin": 1,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "chile",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": null
+    }
+  ],
+  "final": "resto",
+  "diagnostics": [
+    {
+      "severity": "warning",
+      "line": 2,
+      "code": "unknownPack"
+    },
+    {
+      "severity": "warning",
+      "line": 6,
+      "code": "unknownUnit"
+    },
+    {
+      "severity": "warning",
+      "line": 8,
+      "code": "unknownVerb"
+    },
+    {
+      "severity": "warning",
+      "line": 9,
+      "code": "addLate"
+    },
+    {
+      "severity": "warning",
+      "line": 10,
+      "code": "undeclaredTool"
+    },
+    {
+      "severity": "warning",
+      "line": 10,
+      "code": "unusedResult"
+    },
+    {
+      "severity": "warning",
+      "line": 11,
+      "code": "missingServe"
+    },
+    {
+      "severity": "warning",
+      "line": 11,
+      "code": "keepOnFinal"
+    }
+  ],
+  "schedule": {
+    "normative": true,
+    "asap": {
+      "total": 32,
+      "starts": {
+        "masa": 0,
+        "resto": 0,
+        "pan": 2
+      },
+      "critical": [
+        "masa",
+        "pan"
+      ],
+      "violations": []
+    },
+    "alap": {
+      "total": 32,
+      "starts": {
+        "masa": 0,
+        "resto": 31,
+        "pan": 2
+      },
+      "critical": [
+        "masa",
+        "pan"
+      ],
+      "violations": []
+    }
+  }
+}

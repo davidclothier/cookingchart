@@ -1,0 +1,19 @@
+recipe "French omelette"
+description "The simplest recipe: everything in a row, no parallel work"
+cuisine "French"
+servings 1
+cooks 1
+
+ingredients
+  eggs     3 pcs
+  salt     1 pinch
+  oil      2 tbsp
+
+tools
+  fork, pan
+
+mix "Beaten eggs" = beat(eggs, salt) with fork 2min
+hot_oil = heat(oil) in pan @heat:medium 1min
+omelette = cook(mix, hot_oil) in pan @heat:medium 4-5min until "set"
+
+serve omelette "French omelette"

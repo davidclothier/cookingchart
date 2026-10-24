@@ -1,0 +1,146 @@
+{
+  "lang": "en",
+  "cuisine": null,
+  "plan": null,
+  "cooks": 1,
+  "burners": null,
+  "packs": [],
+  "ingredients": [
+    {
+      "id": "onion",
+      "quantity": 1,
+      "unit": "pc"
+    },
+    {
+      "id": "carrot",
+      "quantity": 1,
+      "unit": "pc"
+    },
+    {
+      "id": "garlic",
+      "quantity": 2,
+      "unit": "cloves"
+    }
+  ],
+  "steps": [
+    {
+      "id": "a",
+      "verb": "chop",
+      "kind": "prep",
+      "attention": "active",
+      "duration": 5,
+      "durationMin": 5,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "onion",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "A"
+    },
+    {
+      "id": "b",
+      "verb": "chop",
+      "kind": "prep",
+      "attention": "active",
+      "duration": 5,
+      "durationMin": 5,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "carrot",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "B"
+    },
+    {
+      "id": "c",
+      "verb": "chop",
+      "kind": "prep",
+      "attention": "active",
+      "duration": 2,
+      "durationMin": 2,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "garlic",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "C"
+    },
+    {
+      "id": "d",
+      "verb": "saute",
+      "kind": "heat",
+      "attention": "active",
+      "duration": 10,
+      "durationMin": 10,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "a",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "b",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "c",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": null
+    }
+  ],
+  "final": "d",
+  "diagnostics": [],
+  "schedule": {
+    "normative": false,
+    "asap": {
+      "total": 22,
+      "starts": {
+        "a": 0,
+        "b": 5,
+        "c": 10,
+        "d": 12
+      },
+      "critical": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "violations": []
+    },
+    "alap": {
+      "total": 22,
+      "starts": {
+        "a": 7,
+        "b": 2,
+        "c": 0,
+        "d": 12
+      },
+      "critical": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "violations": []
+    }
+  }
+}

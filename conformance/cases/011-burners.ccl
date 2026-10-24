@@ -1,0 +1,10 @@
+receta "Un fuego"
+fuegos 1
+ingredientes
+  arroz 200 g
+  agua 400 ml
+  pollo 300 g
+arroz_cocido = cocer(arroz, agua) 20min
+pollo_dorado = dorar(pollo) 10min
+plato = mezclar(arroz_cocido, pollo_dorado) 2min
+servir plato

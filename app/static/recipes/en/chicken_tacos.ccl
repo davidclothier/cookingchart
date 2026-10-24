@@ -1,0 +1,40 @@
+recipe "Chicken tacos with guacamole"
+description "Lots of cold prep in parallel, and tortillas warmed at the very last moment"
+cuisine "Mexican"
+servings 4
+cooks 1
+schedule just_in_time         # tortillas, freshly warmed
+
+ingredients
+  chicken    600 g     "Chicken thighs"
+  lime       3 pcs
+  garlic     2 cloves
+  cumin      1 tsp
+  chili      1 tsp     "Chili powder"
+  salt       to taste
+  oil        2 tbsp
+  avocado    3 pcs
+  onion      1 pc
+  tomato     2 pcs
+  jalapeno   1 pc      "Jalapeño"
+  cilantro   1 sprig
+  tortillas  12 pcs    "Corn tortillas"
+
+tools
+  pan, comal, molcajete
+
+block "Chicken"
+  marinade          = mix(lime[1/3], garlic, cumin, chili, salt) 3min
+  marinated_chicken = marinate(chicken, marinade) 30min
+  browned_chicken   = brown(marinated_chicken, oil) in pan @heat:high 12min
+  chopped_chicken   = chop(browned_chicken) 3min keeps 10min
+end
+
+chopped_onion = chop(onion) 3min
+pico_de_gallo "Pico de gallo" = mix(chopped_onion[1/2], tomato, jalapeno, cilantro[1/2], lime[1/3]) 6min
+guacamole     = mash(avocado, chopped_onion[1/2], cilantro[1/2], lime[1/3]) in molcajete 5min keeps 30min
+
+warm_tortillas = heat(tortillas) on comal 5min no wait
+tacos = assemble(warm_tortillas, chopped_chicken, guacamole, pico_de_gallo) 5min
+
+serve tacos "Chicken tacos"

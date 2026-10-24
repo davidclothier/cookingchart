@@ -1,0 +1,11 @@
+receta "Avisos"
+usa "cocina_marciana"
+ingredientes
+  harina 100 g
+  sal 1 pizca
+  azafrán 3 hebras
+  chile 1 ud
+masa = zarandear(harina, sal) 2min
+  + azafrán a los 5min
+pan = hornear(masa) en horno_de_leña 30min
+resto = picar(chile) 1min aguanta 5min

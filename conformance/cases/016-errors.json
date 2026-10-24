@@ -1,0 +1,122 @@
+{
+  "lang": "en",
+  "cuisine": null,
+  "plan": null,
+  "cooks": null,
+  "burners": null,
+  "packs": [],
+  "ingredients": [
+    {
+      "id": "eggs",
+      "quantity": 2,
+      "unit": "pc"
+    }
+  ],
+  "steps": [
+    {
+      "id": "a",
+      "verb": "beat",
+      "kind": "prep",
+      "attention": "active",
+      "duration": 2,
+      "durationMin": 2,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "eggs",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "A"
+    },
+    {
+      "id": "b",
+      "verb": "cook",
+      "kind": "heat",
+      "attention": "active",
+      "duration": 0,
+      "durationMin": 0,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "a",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "B"
+    },
+    {
+      "id": "c",
+      "verb": "mix",
+      "kind": "assemble",
+      "attention": "active",
+      "duration": 1,
+      "durationMin": 1,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "d",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "C"
+    },
+    {
+      "id": "d",
+      "verb": "mix",
+      "kind": "assemble",
+      "attention": "active",
+      "duration": 1,
+      "durationMin": 1,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "c",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "D"
+    }
+  ],
+  "final": null,
+  "diagnostics": [
+    {
+      "severity": "error",
+      "line": 4,
+      "code": "undefinedName"
+    },
+    {
+      "severity": "error",
+      "line": 5,
+      "code": "noDuration"
+    },
+    {
+      "severity": "warning",
+      "line": 5,
+      "code": "unusedResult"
+    },
+    {
+      "severity": "error",
+      "line": 6,
+      "code": "dupResult"
+    },
+    {
+      "severity": "error",
+      "line": 7,
+      "code": "cycle"
+    },
+    {
+      "severity": "error",
+      "line": 9,
+      "code": "serveUndefined"
+    }
+  ]
+}

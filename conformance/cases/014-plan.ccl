@@ -1,0 +1,9 @@
+receta "Plan declarado"
+plan justo_a_tiempo
+ingredientes
+  leche 500 ml
+  carne 500 g
+bechamel = cocinar(leche) 10min
+salsa = guisar(carne) 60min
+plato = montar(bechamel, salsa) 5min
+servir plato

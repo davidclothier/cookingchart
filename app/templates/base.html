@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ t('title.' ~ page) }}{% endblock %}</title>
+    <meta name="description" content="{% block description %}{{ t('desc.' ~ page) }}{% endblock %}">
+    <link rel="canonical" href="{{ site_url }}{{ alternates[lang] }}">
+    {% for code, href in alternates.items() %}
+    <link rel="alternate" hreflang="{{ code }}" href="{{ site_url }}{{ href }}">
+    {% endfor %}
+    <link rel="alternate" hreflang="x-default" href="{{ site_url }}{{ alternates['en'] }}">
+    <!-- Vista previa al compartir el enlace (redes, mensajería) -->
+    <meta property="og:type" content="{{ 'website' if page == 'home' else 'article' }}">
+    <meta property="og:site_name" content="Cooking Chart">
+    <meta property="og:title" content="{{ self.title() }}">
+    <meta property="og:description" content="{{ self.description() }}">
+    <meta property="og:url" content="{{ site_url }}{{ alternates[lang] }}">
+    <meta property="og:image" content="{{ site_url }}/static/img/og-{{ lang }}.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="{{ t('og.alt') }}">
+    <meta property="og:locale" content="{{ 'es_ES' if lang == 'es' else 'en_US' }}">
+    {% for code in alternates if code != lang %}
+    <meta property="og:locale:alternate" content="{{ 'es_ES' if code == 'es' else 'en_US' }}">
+    {% endfor %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#f4eee3">
+    <meta name="author" content="David Clothier">
+    {% if page == 'home' %}
+    <script type="application/ld+json">
+    {{ {
+        "@context": "https://schema.org",
+        "@graph": [
+            {"@type": "WebSite", "@id": site_url ~ "/#website", "name": "Cooking Chart", "url": site_url ~ "/" ~ lang ~ "/",
+             "inLanguage": lang, "description": t('desc.home')},
+            {"@type": "SoftwareSourceCode", "name": "Cooking Chart", "url": site_url ~ "/" ~ lang ~ "/",
+             "codeRepository": "https://github.com/davidclothier/cookingchart",
+             "programmingLanguage": ["JavaScript", "CCL"], "license": "https://www.apache.org/licenses/LICENSE-2.0",
+             "author": {"@type": "Person", "name": "David Clothier", "email": "hello@cookingchart.org"}}
+        ]
+    } | tojson }}
+    </script>
+    {% endif %}
+    {% if page == 'home' and lang == 'en' %}
+    <!-- Primera visita a la portada con el navegador en español: a /es/. Si el visitante ya eligió idioma con el selector (cookie lang), se respeta -->
+    <script>
+    (function () {
+        try {
+            if (/(?:^|; )lang=/.test(document.cookie)) return;
+            var prefs = navigator.languages || [navigator.language || ''];
+            for (var i = 0; i < prefs.length; i++) {
+                var c = String(prefs[i]).slice(0, 2).toLowerCase();
+                if (c === 'es') { location.replace('/es/' + location.hash); return; }
+                if (c === 'en') return;
+            }
+        } catch (e) {}
+    })();
+    </script>
+    {% endif %}
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/static/img/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png">
+    <link rel="manifest" href="/static/site.webmanifest">
+
+    <!-- Todo se sirve desde el propio sitio: ninguna visita llega a terceros -->
+    <link rel="preload" href="/static/fonts/fraunces-normal-300-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/static/fonts/newsreader-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Fraunces (títulos), Newsreader (texto), IBM Plex Mono (código y rótulos), Inter (textos del gráfico) -->
+    <link rel="stylesheet" href="{{ asset('/static/fonts/fonts.css') }}">
+    <script src="{{ asset('/static/vendor/d3.min.js') }}" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i"></script>
+    <link rel="stylesheet" href="{{ asset('/static/css/site.css') }}">
+
+    <!-- Textos de la parte interactiva (es / en); el idioma lo fija <html lang> -->
+    <script src="{{ asset('/static/js/i18n.js') }}"></script>
+
+    {% block extra_head %}{% endblock %}
+    <!-- Tailwind compilado (npm run build:css); va al final, como hacía el CDN, para que sus clases manden -->
+    <link rel="stylesheet" href="{{ asset('/static/css/tailwind.css') }}">
+</head>
+<body class="bg-stone-50 text-stone-900 antialiased">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-white px-3 py-2 rounded">{{ t('skip') }}</a>
+
+    <nav class="site-nav sticky top-0 z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 gap-4">
+            <a href="{{ base }}/" class="flex items-center gap-2 shrink-0" aria-label="Cooking Chart">
+                <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
+                    <rect x="3" y="9" width="12" height="6" rx="2" fill="#0e7490"/>
+                    <rect x="15" y="9" width="10" height="6" rx="2" fill="#ea580c"/>
+                    <path d="M14 22 C 19 22, 20 14, 24 12" fill="none" stroke="#c9bba3" stroke-width="3"/>
+                    <rect x="5" y="19" width="10" height="6" rx="2" fill="#b91c1c"/>
+                    <circle cx="28" cy="12" r="3" fill="#ca8a04"/>
+                </svg>
+                <span class="brand-name">Cooking Chart</span>
+            </a>
+            <div class="site-links flex items-center gap-5 overflow-x-auto min-w-0">
+                {% for key, href in [('home', ''), ('tutorial', 'tutorial'), ('gallery', 'gallery'), ('editor', 'editor'), ('spec', 'spec'), ('embed', 'embed'), ('about', 'about')] %}
+                <a href="{{ base }}/{{ href }}" class="nav-link whitespace-nowrap {{ 'active' if page == key }}"
+                   {% if page == key %}aria-current="page"{% endif %}>{{ t('nav.' ~ key) }}</a>
+                {% endfor %}
+                <div class="lang-switch inline-flex overflow-hidden shrink-0" role="group" aria-label="Language">
+                    {% for code, href in alternates.items() %}
+                    <a href="{{ href }}" hreflang="{{ code }}" lang="{{ code }}" class="px-2 py-0.5 {{ 'on' if code == lang }}"
+                       {% if code == lang %}aria-current="true"{% endif %}>{{ code | upper }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </nav>
+    <script>
+        // Elegir idioma con el selector lo recuerda (la portada en inglés ya no redirige a /es/)
+        document.querySelectorAll('.lang-switch a').forEach(function (a) {
+            a.addEventListener('click', function () {
+                try { document.cookie = 'lang=' + a.hreflang + '; path=/; max-age=31536000; samesite=lax'; } catch (e) {}
+            });
+        });
+    </script>
+
+    <main id="main" class="{% block main_class %}max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8{% endblock %}">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer mt-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-wrap gap-x-6 gap-y-2 justify-between">
+            <p>{{ t('footer.tagline') }}</p>
+            <p class="flex flex-wrap gap-x-4 gap-y-1">
+                <a class="hover:text-stone-800" href="{{ base }}/docs/license">{{ t('footer.code') }}</a>
+                <a class="hover:text-stone-800" href="{{ base }}/docs/license-spec">{{ t('footer.spec') }}</a>
+                <a class="hover:text-stone-800" href="{{ base }}/docs/trademarks">{{ t('footer.trademarks') }}</a>
+                <a class="hover:text-stone-800" href="{{ base }}/legal">{{ t('nav.legal') }}</a>
+                <a class="hover:text-stone-800" href="mailto:hello@cookingchart.org">hello@cookingchart.org</a>
+                <span>© 2025-2026 David Clothier</span>
+            </p>
+        </div>
+    </footer>
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

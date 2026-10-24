@@ -1,0 +1,9 @@
+recipe "Spaghetti with tomato sauce"
+
+ingredients
+  pasta  200 g
+  water  2 l
+
+spaghetti = boil(pasta, water) 10min
+
+serve spaghetti

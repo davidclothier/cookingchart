@@ -1,0 +1,9 @@
+receta "Espaguetis con tomate"
+
+ingredientes
+  pasta  200 g
+  agua   2 l
+
+espaguetis = cocer(pasta, agua) 10min
+
+servir espaguetis

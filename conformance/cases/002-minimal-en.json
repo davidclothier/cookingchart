@@ -1,0 +1,60 @@
+{
+  "lang": "en",
+  "cuisine": null,
+  "plan": null,
+  "cooks": null,
+  "burners": null,
+  "packs": [],
+  "ingredients": [
+    {
+      "id": "eggs",
+      "quantity": 2,
+      "unit": "pc"
+    }
+  ],
+  "steps": [
+    {
+      "id": "beaten",
+      "verb": "beat",
+      "kind": "prep",
+      "attention": "active",
+      "duration": 2,
+      "durationMin": 2,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "eggs",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": null
+    }
+  ],
+  "final": "beaten",
+  "diagnostics": [],
+  "schedule": {
+    "normative": true,
+    "asap": {
+      "total": 2,
+      "starts": {
+        "beaten": 0
+      },
+      "critical": [
+        "beaten"
+      ],
+      "violations": []
+    },
+    "alap": {
+      "total": 2,
+      "starts": {
+        "beaten": 0
+      },
+      "critical": [
+        "beaten"
+      ],
+      "violations": []
+    }
+  }
+}

@@ -1,0 +1,15 @@
+# Cantidades en rango (§3.1): se muestran tal cual, con la unidad en plural
+recipe "Garlic oil"
+
+ingredients
+  garlic  1-2 clove
+  oil     3-4 tbsp  "Olive oil"
+  chili   0.5-1 pc
+  salt    to taste
+
+tools
+  pan
+
+garlic_oil "Garlic oil" = fry(garlic, oil, chili, salt) in pan @heat:low 4-5min
+
+serve garlic_oil

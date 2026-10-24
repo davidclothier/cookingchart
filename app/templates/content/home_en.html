@@ -1,0 +1,97 @@
+{# English copy for the home page. Layout lives in home.html. #}
+
+{% set eyebrow = 'An open standard · v0.2' %}
+{% set hero_title = 'A recipe is not a list. It is a <em>river</em>.' %}
+{% set hero_lead = 'Write the recipe as text and <strong>Cooking Chart draws it for you</strong>: how long each step takes, what happens at the same time, when each ingredient goes in and how long your hands are busy.' %}
+{% set cta_editor = 'Open the editor' %}
+{% set cta_gallery = 'See recipes' %}
+{% set cta_tutorial = '8-step tutorial' %}
+{% set cta_spec = 'Read the specification' %}
+{% set cta_embed = 'Embed it on your site' %}
+{% set write_this = 'See the text that draws it' %}
+{% set plate_no = 'Plate I' %}
+{% set plate_title = 'Lasagna bolognese.' %}
+{% set plate_caption = 'The bolognese and the béchamel run in parallel and flow into the assembly.' %}
+{% set ch_problem = 'The problem' %}
+{% set ch_read = 'How to read it' %}
+{% set ch_writers = 'For recipe writers' %}
+{% set ch_pieces = 'The standard' %}
+{% set ch_signatures = 'Signatures' %}
+{% set ch_open = 'Open' %}
+{% set get_this = '…and you get this' %}
+
+{% set hero_ccl %}
+recipe "Lasagna bolognese"
+cooks 1
+
+ingredients
+  beef    500 g
+  tomato  800 g
+  milk    500 ml
+  flour   50 g
+  butter  50 g
+  sheets  250 g
+
+bolognese = simmer(beef, tomato) 45min
+roux      = cook(butter, flour) 5min
+bechamel  = cook(roux, milk) 10min keeps 30min
+lasagna   = assemble(bolognese, bechamel, sheets) 15min
+baked     = bake(lasagna) @180ºC 40min
+
+serve baked
+{% endset %}
+
+{% set problem_title = 'Good cooks <em>don\'t read</em> recipes top to bottom.' %}
+{% set problem_lead = 'Recipes are written as a sequence of steps, but cooking doesn\'t work that way. While something boils you chop something else; a sauce has to be ready right when you need it; the oven goes on ahead of time. What a good cook keeps in their head, a list doesn\'t show.' %}
+{% set problems = [
+    ('Time', 'How long each step and the whole recipe take, drawn to scale: a 45-minute step is nine times longer than a 5-minute one.'),
+    ('Parallelism', 'What you can do at the same time, what depends on what, and what sets the pace. The critical path shows up on its own.'),
+    ('Your hands', 'Which steps keep you busy and which run on their own: the oven, a stew, a rest. And how much free time the recipe leaves you.'),
+] %}
+
+{% set read_title = 'A visual grammar, <em>always the same</em>.' %}
+{% set read_lead = 'Time flows from left to right. Each preparation runs in its own lane and everything flows into the dish, like a river.' %}
+{% set legend = [
+    ('bar', 'Process', 'One bar per step, from the minute it starts to the minute it ends. The color is the kind: prep, stovetop, oven, rest or assembly.'),
+    ('hatched', 'Unattended', 'Hatched: the step runs on its own and you can do something else.'),
+    ('ingredient', 'Ingredient', 'Drops onto the step that uses it, at the exact minute it goes in.'),
+    ('band', 'What you have so far', 'The band leaving each step. It grows thicker as it gathers ingredients.'),
+    ('tributary', 'Tributary', 'A parallel preparation flowing into another one: the béchamel into the assembly.'),
+    ('wait', 'Waiting', 'Dashed: something ready, waiting for its turn. Red if it waits longer than it keeps.'),
+    ('critical', 'Critical path', 'The white line under the steps that set the total time. If they slip, the dish slips.'),
+    ('hands', 'Hands', 'Below the chart, when you are busy. Red if it would take more hands than you have.'),
+    ('dish', 'Dish', 'Where everything ends, with the total time.'),
+] %}
+
+{% set pieces_title = 'Three pieces, <em>one standard</em>.' %}
+{% set pieces = [
+    ('A language: CCL', 'Each step is one line: result = verb(ingredients) duration. Dependencies, parallelism and timing are worked out for you. In English and Spanish.', 'spec', 'Specification'),
+    ('A chart and two texts', 'The same text gives the chart, with no crossing lines, the work plan with its minutes and the method, in linked sentences. Nobody writes or places anything by hand.', 'gallery', 'Gallery'),
+    ('Embeddable', 'One line of code and your recipe appears drawn on your blog, your website or a Markdown document.', 'embed', 'How to embed it'),
+] %}
+
+{% set signature_title = 'Every recipe has <em>a signature</em>.' %}
+{% set writers_title = 'If you write recipes, <em>this is for you</em>.' %}
+{% set writers_lead = 'On a blog, on your website or in your own notebook: Cooking Chart turns your recipes into something you understand at a glance, without changing the way you work.' %}
+{% set writers = [
+    ('On your blog or website', 'One line of code and the recipe appears drawn, with the method and the work plan if you want them. Search engines get it in the format they understand. Works on WordPress, Hugo, Astro or any page that takes HTML or Markdown.', 'embed', 'How to embed it'),
+    ('For your own recipe book', 'Your recipes as plain text, yours forever. Open them in the editor, see when to start each thing and share them with a link.', 'editor', 'Open the editor'),
+    ('Without learning the language', 'Paste your recipe into the editor, copy the instructions for your AI (ChatGPT, Gemini, Claude…) and come back with the recipe already written in CCL, ready to be drawn.', 'editor', 'Convert with your AI'),
+] %}
+{% set signature_lead = 'The same chart, without text and at the same scale. An omelette is a short stroke; a loaf of bread is a long line, almost all hatched: lots of time, little work.' %}
+{% set signatures = [
+    ('french_omelette', 'French omelette', '8 min', 13),
+    ('chicken_rice', 'Chicken and rice', '30 min', 21),
+    ('mushroom_risotto', 'Mushroom risotto', '45 min', 26),
+    ('lasagna_bolognese', 'Lasagna bolognese', '2 h 15', 57),
+    ('country_bread', 'Country bread', '4 h 20', 100),
+] %}
+
+{% set open_title = 'Truly <em>open</em>.' %}
+{% set open_lead = 'Cooking Chart is a standard, not a product. Anyone can write recipes, build tools or extend the vocabulary.' %}
+{% set open_points = [
+    ('Open specification', 'CC BY 4.0: use it, translate it or extend it with attribution.'),
+    ('Open source', 'The reference implementation is Apache 2.0.'),
+    ('Conformance suite', 'Test cases so anyone can write their own parser and prove it is compatible.'),
+    ('Extensible', 'Vocabulary packs (pastry, kitchen robots…) and private extensions with the x- prefix.'),
+] %}

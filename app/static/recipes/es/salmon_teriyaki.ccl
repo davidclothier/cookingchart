@@ -1,0 +1,47 @@
+receta "Salmón teriyaki"
+descripcion "Arroz, salmón y sopa de miso: tres carriles que tienen que terminar a la vez"
+cocina "Japonesa"
+raciones 2
+cocineros 1
+
+ingredientes
+  arroz      300 g     "Arroz japonés"
+  agua       360 ml
+  salmon     2 ud      "Lomos de salmón"
+  soja       4 cda     "Salsa de soja"
+  mirin      4 cda
+  sake       2 cda
+  azucar     1 cda     "Azúcar"
+  dashi      600 ml
+  miso       3 cda
+  tofu       150 g
+  wakame     5 g
+  cebolleta  1 ud
+  sesamo     1 cdta    "Sésamo"
+
+herramientas
+  olla, sartén, cazo
+
+bloque "Arroz"
+  arroz_lavado    = lavar(arroz) 5min
+  arroz_hidratado = hidratar(arroz_lavado, agua) 30min
+  arroz_cocido    = cocer(arroz_hidratado) en olla @tapado 12min
+  arroz_listo     = reposar(arroz_cocido) 10min @tapado aguanta 10min
+fin
+
+bloque "Salmón"
+  salsa           "Salsa teriyaki" = mezclar(soja, mirin, sake, azucar) 2min
+  salmon_marcado  = marcar(salmon) en sartén @fuego:alto 4min
+  salmon_glaseado = reducir(salmon_marcado, salsa) en sartén 4min atendido aguanta 5min
+fin
+
+bloque "Sopa de miso"
+  wakame_hidratada = hidratar(wakame) 10min
+  caldo            = calentar(dashi) en cazo 5min
+  sopa             "Sopa de miso" = añadir(caldo, miso, tofu, wakame_hidratada) en cazo 3min sin espera
+fin
+
+cebolleta_picada = picar(cebolleta) 2min
+plato = emplatar(arroz_listo, salmon_glaseado, sopa, cebolleta_picada, sesamo) 3min
+
+servir plato "Teishoku de salmón teriyaki"

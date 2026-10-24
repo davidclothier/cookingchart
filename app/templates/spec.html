@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+<script src="{{ asset('/embed.js') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 lg:grid-cols-[15rem_minmax(0,1fr)] gap-10">
+    <aside class="hidden lg:block">
+        <nav class="spec-toc sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto text-sm pr-2" aria-label="{{ t('spec.toc') }}">
+            <p class="text-xs font-semibold uppercase tracking-wider text-stone-500 mb-3">{{ t('spec.toc') }}</p>
+            <ul class="space-y-1.5">
+                {% for h2 in toc %}
+                <li>
+                    <a href="#{{ h2.id }}" class="block">{{ h2.name | safe }}</a>
+                    {% if h2.children %}
+                    <ul class="mt-1 mb-2 ml-3 space-y-1 text-[13px]">
+                        {% for h3 in h2.children %}<li><a href="#{{ h3.id }}" class="block">{{ h3.name | safe }}</a></li>{% endfor %}
+                    </ul>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </aside>
+
+    <article class="min-w-0 spec-prose prose prose-stone prose-headings:tracking-tight prose-a:text-orange-700 prose-code:before:content-none prose-code:after:content-none prose-code:bg-stone-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:font-normal prose-pre:bg-stone-900"
+             data-cooking-chart="off">
+        {{ body | safe }}
+    </article>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // Las recetas completas de la especificación se dibujan debajo de su código
+    document.querySelectorAll('.spec-prose pre > code.language-ccl').forEach(code => {
+        const text = code.textContent;
+        if (!/^\s*(servir|serve)\s/m.test(text)) return;   // fragmentos sin plato: solo código
+        const wrap = document.createElement('div');
+        wrap.className = 'spec-chart not-prose';
+        wrap.innerHTML = '<p class="spec-chart-label">{{ t("spec.chart") }}</p>';
+        const chart = document.createElement('cooking-chart');
+        chart.setAttribute('controls', '');
+        chart._source = text;
+        wrap.appendChild(chart);
+        code.parentElement.after(wrap);
+    });
+
+    // Resaltar en el índice la sección que se está leyendo
+    const links = new Map([...document.querySelectorAll('.spec-toc a')].map(a => [a.hash.slice(1), a]));
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            links.forEach(a => a.classList.remove('current'));
+            const a = links.get(e.target.id);
+            if (a) a.classList.add('current');
+        });
+    }, { rootMargin: '-70px 0px -70% 0px' });
+    document.querySelectorAll('.spec-prose h2[id], .spec-prose h3[id]').forEach(h => observer.observe(h));
+</script>
+{% endblock %}

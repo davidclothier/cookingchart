@@ -1,0 +1,126 @@
+{
+  "lang": "es",
+  "cuisine": null,
+  "plan": null,
+  "cooks": null,
+  "burners": null,
+  "packs": [],
+  "ingredients": [
+    {
+      "id": "a",
+      "quantity": 500,
+      "unit": "g"
+    },
+    {
+      "id": "b",
+      "quantity": 2,
+      "unit": "cda"
+    },
+    {
+      "id": "c",
+      "quantity": 1,
+      "unit": "cdta"
+    },
+    {
+      "id": "d",
+      "quantity": 3,
+      "unit": "dientes"
+    },
+    {
+      "id": "e",
+      "quantity": "",
+      "unit": "al gusto"
+    },
+    {
+      "id": "f",
+      "quantity": 1.5,
+      "unit": "l"
+    },
+    {
+      "id": "g",
+      "quantity": 2,
+      "unit": "terrones"
+    }
+  ],
+  "steps": [
+    {
+      "id": "todo",
+      "verb": "mix",
+      "kind": "assemble",
+      "attention": "active",
+      "duration": 1,
+      "durationMin": 1,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "a",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "b",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "c",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "d",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "e",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "f",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "g",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": null
+    }
+  ],
+  "final": "todo",
+  "diagnostics": [
+    {
+      "severity": "warning",
+      "line": 10,
+      "code": "unknownUnit"
+    }
+  ],
+  "schedule": {
+    "normative": true,
+    "asap": {
+      "total": 1,
+      "starts": {
+        "todo": 0
+      },
+      "critical": [
+        "todo"
+      ],
+      "violations": []
+    },
+    "alap": {
+      "total": 1,
+      "starts": {
+        "todo": 0
+      },
+      "critical": [
+        "todo"
+      ],
+      "violations": []
+    }
+  }
+}

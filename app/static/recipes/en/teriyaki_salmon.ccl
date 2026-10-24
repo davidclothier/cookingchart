@@ -1,0 +1,47 @@
+recipe "Teriyaki salmon"
+description "Rice, salmon and miso soup: three lanes that have to finish together"
+cuisine "Japanese"
+servings 2
+cooks 1
+
+ingredients
+  rice       300 g     "Japanese rice"
+  water      360 ml
+  salmon     2 pcs     "Salmon fillets"
+  soy        4 tbsp    "Soy sauce"
+  mirin      4 tbsp
+  sake       2 tbsp
+  sugar      1 tbsp
+  dashi      600 ml
+  miso       3 tbsp
+  tofu       150 g
+  wakame     5 g
+  scallion   1 pc
+  sesame     1 tsp
+
+tools
+  pot, pan, saucepan
+
+block "Rice"
+  washed_rice   = wash(rice) 5min
+  soaked_rice   = soak(washed_rice, water) 30min
+  cooked_rice   = boil(soaked_rice) in pot @covered 12min
+  rice_ready    = rest(cooked_rice) 10min @covered keeps 10min
+end
+
+block "Salmon"
+  sauce          "Teriyaki sauce" = mix(soy, mirin, sake, sugar) 2min
+  seared_salmon  = sear(salmon) in pan @heat:high 4min
+  glazed_salmon  = reduce(seared_salmon, sauce) in pan 4min attended keeps 5min
+end
+
+block "Miso soup"
+  soaked_wakame = soak(wakame) 10min
+  hot_dashi     = heat(dashi) in saucepan 5min
+  soup          "Miso soup" = add(hot_dashi, miso, tofu, soaked_wakame) in saucepan 3min no wait
+end
+
+chopped_scallion = chop(scallion) 2min
+dish = plate(rice_ready, glazed_salmon, soup, chopped_scallion, sesame) 3min
+
+serve dish "Teriyaki salmon teishoku"

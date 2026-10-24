@@ -1,0 +1,142 @@
+{
+  "lang": "es",
+  "cuisine": null,
+  "plan": null,
+  "cooks": 1,
+  "burners": null,
+  "packs": [],
+  "ingredients": [
+    {
+      "id": "patatas",
+      "quantity": 500,
+      "unit": "g",
+      "gram": "fp"
+    },
+    {
+      "id": "huevos",
+      "quantity": 2,
+      "unit": "ud"
+    },
+    {
+      "id": "aceite",
+      "quantity": 200,
+      "unit": "ml",
+      "gram": "m"
+    }
+  ],
+  "toolGram": {
+    "sartén": "f",
+    "espumadera": "f"
+  },
+  "steps": [
+    {
+      "id": "fritas",
+      "verb": "fry",
+      "kind": "heat",
+      "attention": "active",
+      "duration": 15,
+      "durationMin": 15,
+      "keep": null,
+      "tools": [
+        "sartén"
+      ],
+      "inputs": [
+        {
+          "ref": "patatas",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "aceite",
+          "at": 0,
+          "fraction": 0.75
+        }
+      ],
+      "output": "Patatas fritas",
+      "gram": "fp"
+    },
+    {
+      "id": "fritos",
+      "verb": "fry",
+      "kind": "heat",
+      "attention": "active",
+      "duration": 3,
+      "durationMin": 3,
+      "keep": null,
+      "tools": [
+        "sartén",
+        "espumadera"
+      ],
+      "inputs": [
+        {
+          "ref": "huevos",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "aceite",
+          "at": 0,
+          "fraction": 0.25
+        }
+      ],
+      "output": "Fritos",
+      "gram": "mp"
+    },
+    {
+      "id": "plato",
+      "verb": "plate",
+      "kind": "assemble",
+      "attention": "active",
+      "duration": 1,
+      "durationMin": 1,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "fritas",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "fritos",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": null
+    }
+  ],
+  "final": "plato",
+  "diagnostics": [],
+  "schedule": {
+    "normative": false,
+    "asap": {
+      "total": 19,
+      "starts": {
+        "fritas": 0,
+        "fritos": 15,
+        "plato": 18
+      },
+      "critical": [
+        "fritas",
+        "fritos",
+        "plato"
+      ],
+      "violations": []
+    },
+    "alap": {
+      "total": 19,
+      "starts": {
+        "fritas": 3,
+        "fritos": 0,
+        "plato": 18
+      },
+      "critical": [
+        "fritas",
+        "fritos",
+        "plato"
+      ],
+      "violations": []
+    }
+  }
+}

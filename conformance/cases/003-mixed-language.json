@@ -1,0 +1,73 @@
+{
+  "lang": "es",
+  "cuisine": null,
+  "plan": null,
+  "cooks": null,
+  "burners": null,
+  "packs": [],
+  "ingredients": [
+    {
+      "id": "harina",
+      "quantity": 100,
+      "unit": "g"
+    }
+  ],
+  "steps": [
+    {
+      "id": "masa",
+      "verb": "mix",
+      "kind": "assemble",
+      "attention": "active",
+      "duration": 3,
+      "durationMin": 3,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "harina",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "Masa"
+    },
+    {
+      "id": "pan",
+      "verb": "bake",
+      "kind": "oven",
+      "attention": "passive",
+      "duration": 20,
+      "durationMin": 20,
+      "keep": null,
+      "tools": [
+        "horno"
+      ],
+      "inputs": [
+        {
+          "ref": "masa",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": null
+    }
+  ],
+  "final": "pan",
+  "diagnostics": [
+    {
+      "severity": "warning",
+      "line": 5,
+      "code": "unusedIngredient"
+    },
+    {
+      "severity": "error",
+      "line": 6,
+      "code": "undefinedName"
+    },
+    {
+      "severity": "warning",
+      "line": 7,
+      "code": "undeclaredTool"
+    }
+  ]
+}

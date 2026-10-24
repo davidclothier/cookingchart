@@ -1,0 +1,39 @@
+receta "Curry verde tailandés"
+descripcion "El arroz va solo mientras el curry se construye capa a capa en el wok"
+cocina "Asiática"
+raciones 4
+cocineros 1
+
+ingredientes
+  arroz        300 g     "Arroz jazmín"
+  agua         450 ml
+  pasta_curry  3 cda     "Pasta de curry verde"
+  coco         400 ml    "Leche de coco"
+  pollo        500 g     "Pechuga de pollo"
+  berenjena    2 ud      "Berenjenas tailandesas"
+  judias       100 g     "Judías verdes"
+  pescado      2 cda     "Salsa de pescado"
+  azucar       1 cda     "Azúcar de palma"
+  lima         4 hojas   "Hojas de lima kaffir"
+  albahaca     1 rama    "Albahaca tailandesa"
+
+herramientas
+  olla, wok
+
+bloque "Arroz"
+  arroz_lavado = lavar(arroz) 3min
+  arroz_cocido = cocer(arroz_lavado, agua) en olla @tapado 15min
+  arroz_listo  = reposar(arroz_cocido) 10min @tapado
+fin
+
+pollo_cortado = cortar(pollo) 5min
+verduras      = cortar(berenjena, judias) 5min
+
+base        = freír(pasta_curry, coco[1/3]) en wok 5min hasta "se separe el aceite"
+curry_pollo = cocinar(base, pollo_cortado) en wok 5min
+curry       = guisar(curry_pollo, coco[2/3], verduras, pescado, azucar, lima) en wok 12min
+  + albahaca a los 11min
+
+plato = emplatar(arroz_listo, curry) 2min
+
+servir plato "Curry verde con arroz jazmín"

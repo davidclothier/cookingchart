@@ -1,0 +1,136 @@
+{
+  "lang": "en",
+  "cuisine": null,
+  "plan": null,
+  "cooks": null,
+  "burners": null,
+  "packs": [],
+  "ingredients": [
+    {
+      "id": "stock",
+      "quantity": 1,
+      "unit": "l"
+    },
+    {
+      "id": "rice",
+      "quantity": 300,
+      "unit": "g"
+    }
+  ],
+  "steps": [
+    {
+      "id": "a",
+      "verb": "heat",
+      "kind": "heat",
+      "attention": "active",
+      "duration": 1.5,
+      "durationMin": 1.5,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "stock",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "A"
+    },
+    {
+      "id": "b",
+      "verb": "boil",
+      "kind": "heat",
+      "attention": "passive",
+      "duration": 90,
+      "durationMin": 90,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "a",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "rice",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "B"
+    },
+    {
+      "id": "c",
+      "verb": "reduce",
+      "kind": "heat",
+      "attention": "passive",
+      "duration": 10,
+      "durationMin": 8,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "b",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "C"
+    },
+    {
+      "id": "d",
+      "verb": "rest",
+      "kind": "rest",
+      "attention": "passive",
+      "duration": 5,
+      "durationMin": 5,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "c",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": null
+    }
+  ],
+  "final": "d",
+  "diagnostics": [],
+  "schedule": {
+    "normative": true,
+    "asap": {
+      "total": 106.5,
+      "starts": {
+        "a": 0,
+        "b": 1.5,
+        "c": 91.5,
+        "d": 101.5
+      },
+      "critical": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "violations": []
+    },
+    "alap": {
+      "total": 106.5,
+      "starts": {
+        "a": 0,
+        "b": 1.5,
+        "c": 91.5,
+        "d": 101.5
+      },
+      "critical": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "violations": []
+    }
+  }
+}

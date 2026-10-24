@@ -1,0 +1,11 @@
+recipe "One cook"
+cooks 1
+ingredients
+  onion 1 pc
+  carrot 1 pc
+  garlic 2 cloves
+a = chop(onion) 5min
+b = chop(carrot) 5min
+c = chop(garlic) 2min
+d = saute(a, b, c) 10min
+serve d

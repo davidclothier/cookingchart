@@ -1,0 +1,39 @@
+recipe "Thai green curry"
+description "The rice cooks on its own while the curry is built layer by layer in the wok"
+cuisine "Asian"
+servings 4
+cooks 1
+
+ingredients
+  rice         300 g     "Jasmine rice"
+  water        450 ml
+  curry_paste  3 tbsp    "Green curry paste"
+  coconut      400 ml    "Coconut milk"
+  chicken      500 g     "Chicken breast"
+  eggplant     2 pcs     "Thai eggplants"
+  beans        100 g     "Green beans"
+  fish_sauce   2 tbsp    "Fish sauce"
+  sugar        1 tbsp    "Palm sugar"
+  lime_leaves  4 leaves  "Kaffir lime leaves"
+  basil        1 sprig   "Thai basil"
+
+tools
+  pot, wok
+
+block "Rice"
+  washed_rice = wash(rice) 3min
+  cooked_rice = boil(washed_rice, water) in pot @covered 15min
+  rice_ready  = rest(cooked_rice) 10min @covered
+end
+
+cut_chicken = cut(chicken) 5min
+vegetables  = cut(eggplant, beans) 5min
+
+base          = fry(curry_paste, coconut[1/3]) in wok 5min until "the oil separates"
+chicken_curry = cook(base, cut_chicken) in wok 5min
+curry         = simmer(chicken_curry, coconut[2/3], vegetables, fish_sauce, sugar, lime_leaves) in wok 12min
+  + basil at 11min
+
+dish = plate(rice_ready, curry) 2min
+
+serve dish "Green curry with jasmine rice"

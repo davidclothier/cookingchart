@@ -1,0 +1,14 @@
+{# Textos de "Acerca de" en español. La maquetación está en about.html. #}
+
+{% set title = 'Por qué existe <em>Cooking Chart</em>' %}
+{% set story = 'Cooking Chart parte de algo que me llamó la atención cocinando: una receta es un grafo dirigido. Cada paso transforma unas entradas en un resultado, unos pasos pueden hacerse en paralelo y otros esperan a que algo esté listo, y todo acaba convergiendo en el plato. Aun así, las recetas se siguen escribiendo como listas de texto libre, sin una estructura que permita analizarlas ni dibujarlas de una forma común. Llevaba tiempo trabajando con grafos en otros contextos, como los flujos condicionales de las encuestas telefónicas (CATI), y usando herramientas como PlantUML o Mermaid, en las que un diagrama se escribe como texto y se genera siempre igual. Cooking Chart es mi intento de llevar ese enfoque a la cocina, con tres piezas:' %}
+{% set pieces = [
+    'un lenguaje textual (CCL) para declarar ingredientes, procesos y dependencias;',
+    'un planificador que calcula tiempos, paralelismo y ruta crítica, y que admite recursos opcionales como cocineros o fuegos;',
+    'una notación visual que dibuja el resultado sin intervención manual.',
+] %}
+{% set closing = 'Lo publico como estándar abierto, con la idea de que sea útil a quien escribe recetas y a quien quiera construir algo encima.' %}
+{% set repo_label = 'El proyecto, en abierto' %}
+{% set repo_text = 'El código, la especificación, la batería de conformidad y las recetas de ejemplo están en GitHub. Puedes proponer mejoras, abrir una incidencia o construir tu propia herramienta encima.' %}
+{% set repo_cta = 'Ver en GitHub' %}
+{% set mail_text = '¿Tienes una idea, una receta que no sabes cómo escribir o cualquier sugerencia? Escríbeme a' %}

@@ -1,0 +1,48 @@
+recipe "Shoyu ramen"
+description "A long broth and two parallel preparations that only meet in the bowl"
+cuisine "Japanese"
+servings 4
+cooks 1
+
+ingredients
+  bones       1.5 kg    "Chicken bones"
+  water       4 l
+  ginger      30 g
+  garlic      4 cloves
+  scallions   2 pcs
+  pork_belly  600 g     "Pork belly"
+  soy         200 ml    "Soy sauce"
+  mirin       100 ml
+  sake        100 ml
+  sugar       2 tbsp
+  eggs        4 pcs
+  noodles     500 g     "Ramen noodles"
+  nori        2 leaves
+  menma       80 g
+
+tools
+  stockpot, pot, saucepan
+
+block "Broth"
+  clean_bones     = blanch(bones) in stockpot 10min
+  broth           = boil(clean_bones, water, ginger, garlic, scallions[1/2]) in stockpot @heat:low 3h
+  strained_broth  = strain(broth) 5min
+end
+
+block "Chashu"
+  rolled          = wrap(pork_belly) 10min
+  tare            "Tare (base sauce)" = mix(soy, mirin, sake, sugar) 2min
+  chashu          = braise(rolled, tare[1/2]) in pot 2h
+  sliced_chashu   = slice(chashu) 5min
+end
+
+block "Eggs"
+  boiled_eggs  = boil(eggs) in saucepan 6-7min
+  cold_eggs    = cool(boiled_eggs) 5min @ice_water
+  ajitama      "Marinated eggs" = marinate(cold_eggs, tare[1/2]) 2h
+end
+
+cooked_noodles = boil(noodles) in saucepan 2min no wait
+ramen = assemble(strained_broth, cooked_noodles, sliced_chashu, ajitama, nori, menma, scallions[1/2]) 5min
+
+serve ramen "Shoyu ramen"

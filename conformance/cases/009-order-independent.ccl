@@ -1,0 +1,11 @@
+# Un paso puede usar un resultado declarado más abajo
+receta "Orden libre"
+ingredientes
+  patata 2 ud
+  huevo 4 ud
+  aceite 200 ml
+servir tortilla
+tortilla = cocinar(mezcla) 8min
+mezcla = mezclar(patatas_fritas, batido) 1min
+batido = batir(huevo) 2min
+patatas_fritas = freír(patata, aceite) 20min

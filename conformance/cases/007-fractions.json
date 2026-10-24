@@ -1,0 +1,133 @@
+{
+  "lang": "es",
+  "cuisine": null,
+  "plan": null,
+  "cooks": null,
+  "burners": null,
+  "packs": [],
+  "ingredients": [
+    {
+      "id": "aceite",
+      "quantity": 4,
+      "unit": "cda"
+    },
+    {
+      "id": "ajo",
+      "quantity": 2,
+      "unit": "dientes"
+    },
+    {
+      "id": "pan",
+      "quantity": 4,
+      "unit": "rebanadas"
+    }
+  ],
+  "steps": [
+    {
+      "id": "ajo_frito",
+      "verb": "fry",
+      "kind": "heat",
+      "attention": "active",
+      "duration": 3,
+      "durationMin": 3,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "ajo",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "aceite",
+          "at": 0,
+          "fraction": 0.5
+        }
+      ],
+      "output": "Ajo frito"
+    },
+    {
+      "id": "tostadas",
+      "verb": "toast",
+      "kind": "heat",
+      "attention": "active",
+      "duration": 5,
+      "durationMin": 5,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "pan",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "aceite",
+          "at": 0,
+          "fraction": 0.25
+        }
+      ],
+      "output": "Tostadas"
+    },
+    {
+      "id": "plato",
+      "verb": "assemble",
+      "kind": "assemble",
+      "attention": "active",
+      "duration": 1,
+      "durationMin": 1,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "ajo_frito",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "tostadas",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": null
+    }
+  ],
+  "final": "plato",
+  "diagnostics": [
+    {
+      "severity": "warning",
+      "line": 6,
+      "code": "partsUnder"
+    }
+  ],
+  "schedule": {
+    "normative": true,
+    "asap": {
+      "total": 6,
+      "starts": {
+        "ajo_frito": 0,
+        "tostadas": 0,
+        "plato": 5
+      },
+      "critical": [
+        "tostadas",
+        "plato"
+      ],
+      "violations": []
+    },
+    "alap": {
+      "total": 6,
+      "starts": {
+        "ajo_frito": 2,
+        "tostadas": 0,
+        "plato": 5
+      },
+      "critical": [
+        "tostadas",
+        "plato"
+      ],
+      "violations": []
+    }
+  }
+}

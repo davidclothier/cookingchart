@@ -1,0 +1,165 @@
+{# English copy for the "Embed" page. Layout lives in embed.html. #}
+
+{% set title = 'Embed a Cooking Chart' %}
+{% set lead = 'One script and one tag. The recipe is drawn in the reader\'s browser, in the language it is written in, with no cookies and no tracking. It works on any website, static blog or CMS that allows HTML.' %}
+{% set result = 'Result' %}
+
+{% set quick_code %}
+<script src="https://cookingchart.org/embed.js" defer></script>
+
+<cooking-chart>
+  recipe "Tomato toast"
+  ingredients
+    bread   1 slice
+    tomato  1 pc
+    oil     1 tbsp
+  toast  = toast(bread) 3min unattended
+  grated = grate(tomato) 2min
+  dish   = assemble(toast, grated, oil) 1min
+  serve dish
+</cooking-chart>
+{% endset %}
+
+{% set quick_demo %}
+<cooking-chart>
+  recipe "Tomato toast"
+  ingredients
+    bread   1 slice
+    tomato  1 pc
+    oil     1 tbsp
+  toast  = toast(bread) 3min unattended
+  grated = grate(tomato) 2min
+  dish   = assemble(toast, grated, oil) 1min
+  serve dish
+</cooking-chart>
+{% endset %}
+
+{% set src_code %}
+<cooking-chart src="/recipes/country_bread.ccl" controls></cooking-chart>
+{% endset %}
+
+{% set src_demo %}<cooking-chart src="/static/recipes/en/country_bread.ccl" controls></cooking-chart>{% endset %}
+
+{% set views_code %}
+<cooking-chart src="/recipes/chicken_tacos.ccl" view="method chart plan" schema></cooking-chart>
+{% endset %}
+
+{% set views_demo %}<cooking-chart src="/static/recipes/en/chicken_tacos.ccl" view="method chart plan"></cooking-chart>{% endset %}
+
+{% set markdown_code %}
+<!-- Once, in your blog template -->
+<script src="https://cookingchart.org/embed.js" defer></script>
+
+<!-- In any .md post -->
+```ccl
+recipe "Soft-boiled egg"
+ingredients
+  egg    1 pc
+  water  500 ml
+boiling_water = boil(water) 5min
+soft_egg      = boil(egg, boiling_water) 6min no wait
+serve soft_egg
+```
+{% endset %}
+
+{% set iframe_code %}
+<iframe src="https://cookingchart.org/e#ccl=cmVjaXBlICJ4Ii…"
+        width="100%" height="420" style="border:0"
+        loading="lazy" title="Lasagna bolognese"></iframe>
+{% endset %}
+
+{% set api_code %}
+<cooking-chart id="my-recipe"></cooking-chart>
+
+<script>
+  const el = document.getElementById('my-recipe');
+
+  // Change the recipe: it is redrawn
+  el.source = recipeText;
+
+  // Know when it was drawn (and whether there were errors)
+  el.addEventListener('cooking-chart:render', e => {
+    const { recipe, diagnostics, ok } = e.detail;
+  });
+
+  // Validate without drawing
+  const { ok, diagnostics } = CookingChart.parse(text, { locale: 'en' });
+</script>
+{% endset %}
+
+{% set style_code %}
+cooking-chart { max-width: 960px; margin: 2rem auto; }
+
+/* The inner card can be tweaked from outside */
+cooking-chart::part(card) { border-radius: 0; border-color: #ddd; }
+{% endset %}
+
+{% set pack_code %}
+<script src="https://cookingchart.org/embed.js"></script>
+<script>
+  CookingChart.registerPack({
+    id: 'thermomix', version: '0.1',
+    names: { es: 'thermomix', en: 'thermomix' },
+    verbs: [
+      // [id, kind, attention, Spanish forms, English forms]
+      ['varoma', 'heat', 'passive', 'cocer_al_vapor', 'steam'],
+      ['turbo',  'prep', 'active',  'turbo',          'turbo']
+    ]
+  });
+</script>
+<!-- and in the recipe:  use "thermomix" -->
+{% endset %}
+
+{% set sections = [
+    {'id': 'quick', 'title': 'In one line',
+     'text': '<p>Load the script once and write the recipe in CCL inside <code>&lt;cooking-chart&gt;</code>. Indentation doesn\'t matter.</p>',
+     'code': quick_code, 'demo': quick_demo},
+    {'id': 'file', 'title': 'From a .ccl file',
+     'text': '<p>If your recipes live in files, point to them with <code>src</code>. With <code>controls</code> readers can switch between <em>as soon as possible</em> and <em>just in time</em>.</p><p>Files on your own site always work; files on another domain need that server to allow CORS.</p>',
+     'code': src_code, 'demo': src_demo},
+    {'id': 'views', 'title': 'Chart, work plan and method',
+     'text': '<p>Besides the chart, the element can show the recipe as text: the <strong>method</strong>, with sentences in the order you cook, and the <strong>work plan</strong>, step by step with its minutes. Pick which ones with <code>view</code>; if there are several, they show as tabs in that order.</p><p>With <code>schema</code>, the recipe is also published as schema.org structured data, which search engines use to show recipes.</p>',
+     'code': views_code, 'demo': views_demo},
+    {'id': 'markdown', 'title': 'In Markdown',
+     'text': '<p>If your blog is static (Hugo, Astro, Jekyll, Eleventy…), you don\'t need HTML: any code block marked as <code>ccl</code> turns into a chart on its own.</p>',
+     'code': markdown_code},
+    {'id': 'options', 'title': 'Options',
+     'text': '<p>Attributes of <code>&lt;cooking-chart&gt;</code>. All of them are optional.</p>',
+     'table': [
+        ['Attribute', 'Values', 'What it does'],
+        ['src', 'URL', 'Loads the recipe from a <code>.ccl</code> file instead of the tag\'s text.'],
+        ['mode', '<code>asap</code> · <code>jit</code>', 'As soon as possible or just in time. Defaults to the recipe\'s declared <code>schedule</code>.'],
+        ['lang', '<code>en</code> · <code>es</code>', 'Forces the language of the chart labels. Defaults to the recipe\'s language.'],
+        ['controls', '—', 'Shows the schedule switch.'],
+        ['variant', '<code>signature</code>', 'Thumbnail without text: the recipe\'s visual signature.'],
+        ['view', '<code>chart</code> · <code>method</code> · <code>plan</code> · <code>all</code>', 'What to show: chart, method or work plan. Several, separated by spaces, show as tabs. Default: <code>chart</code>.'],
+        ['schema', '—', 'Publishes the recipe on the page as schema.org/Recipe JSON-LD.'],
+     ]},
+    {'id': 'iframe', 'title': 'With an iframe',
+     'text': '<p>For platforms that don\'t allow scripts but do allow iframes. The editor generates the code with the <strong>Embed</strong> button. The recipe travels in the URL <em>hash</em> (whatever comes after <code>#</code>), which browsers never send to the server.</p>',
+     'code': iframe_code},
+    {'id': 'image', 'title': 'As an image',
+     'text': '<p>If a platform allows neither scripts nor iframes (social networks, some newsletter tools), use <strong>Download SVG</strong> in the editor. You lose interactivity, but the drawing is identical and scales without losing quality.</p>'},
+    {'id': 'api', 'title': 'JavaScript',
+     'text': '<p>The script exposes <code>window.CookingChart</code>, and each <code>&lt;cooking-chart&gt;</code> has a small API.</p>',
+     'code': api_code,
+     'table': [
+        ['API', 'What it does'],
+        ['el.source = text', 'Changes the element\'s recipe and redraws it.'],
+        ['cooking-chart:render', 'Event after each render; <code>detail</code> has the recipe, the diagnostics and whether it is valid.'],
+        ['CookingChart.parse(text, options)', 'Parses a recipe without drawing it. <code>{ locale: "en" }</code> for English messages.'],
+        ['CookingChart.prepare(recipe, mode)', 'Schedules a parsed recipe: times, slack, lanes.'],
+        ['CookingChart.method(scheduled)', 'The method as data: ingredients, equipment and sentences per moment.'],
+        ['CookingChart.schema(scheduled)', 'The schema.org/Recipe object, to publish it your own way.'],
+        ['CookingChart.upgrade(root)', 'Converts <code>ccl</code> blocks added after the page loaded.'],
+        ['CookingChart.registerPack(pack)', 'Registers a vocabulary pack (see below).'],
+     ]},
+    {'id': 'style', 'title': 'Styling',
+     'text': '<p>The chart lives inside a Shadow DOM: your site\'s styles don\'t break it and its styles don\'t touch your site. It takes the width of its container; to limit it, style the tag. The inner card is exposed as <code>::part(card)</code>.</p><p>Step colors are part of the standard and can\'t be changed, so any reader recognizes a Cooking Chart on any website.</p>',
+     'code': style_code},
+    {'id': 'packs', 'title': 'Your own vocabulary',
+     'text': '<p>If your recipes use verbs outside the base vocabulary (a kitchen-robot brand, pastry techniques…), register a pack and enable it in the recipe with <code>use "name"</code>. For a one-off, a verb with the <code>x-</code> prefix and <code>@kind:</code> is enough.</p>',
+     'code': pack_code},
+    {'id': 'privacy', 'title': 'Privacy',
+     'text': '<p>The script uses no cookies, doesn\'t track and doesn\'t send your recipes anywhere: all parsing and drawing happens in the reader\'s browser. If your page doesn\'t have the drawing library (d3), it downloads it from cookingchart.org, the same site as the script; it contacts no third parties.</p>'},
+] %}

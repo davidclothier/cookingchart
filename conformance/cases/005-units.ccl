@@ -1,0 +1,12 @@
+receta "Unidades"
+idioma es
+ingredientes
+  a 500 gr
+  b 2 cucharadas
+  c 1 teaspoon
+  d 3 cloves
+  e al gusto
+  f 1,5 litros
+  g 2 terrones
+todo = mezclar(a, b, c, d, e, f, g) 1min
+servir todo

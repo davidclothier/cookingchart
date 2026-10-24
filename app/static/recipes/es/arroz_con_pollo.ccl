@@ -1,0 +1,29 @@
+receta "Arroz con pollo"
+descripcion "Dos carriles: mientras el arroz cuece solo, se cocina el pollo"
+cocina "Latinoamericana"
+raciones 2
+cocineros 1
+
+ingredientes
+  arroz     200 g
+  agua      400 ml
+  sal       1 pizca
+  pollo     400 g
+  aceite    2 cda
+  ajo       2 dientes
+  pimiento  1 ud
+
+herramientas
+  olla, sartén
+
+bloque "Arroz"
+  arroz_cocido = cocer(arroz, agua, sal) en olla 20min
+fin
+
+bloque "Pollo"
+  sofrito      = saltear(aceite, ajo, pimiento) en sartén @fuego:alto 5min
+  pollo_cocido = cocinar(sofrito, pollo) en sartén @fuego:medio 20min desatendido
+fin
+
+arroz_con_pollo = mezclar(arroz_cocido, pollo_cocido) en sartén 5min
+servir arroz_con_pollo "Arroz con pollo"

@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# Entorno y secretos
+.env
+
+# Editores
+.vscode/
+.idea/
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.log
+
+# Datos generados para el entrenamiento
+training/data/
+
+# Sitio exportado (tools/build_static.py)
+dist/
+
+# Herramientas de Node (npm run build:css)
+node_modules/

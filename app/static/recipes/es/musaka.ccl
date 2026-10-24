@@ -1,0 +1,50 @@
+receta "Musaka"
+descripcion "Berenjena, carne y bechamel en tres carriles que se encuentran en la fuente"
+cocina "Mediterránea"
+raciones 6
+cocineros 1
+
+ingredientes
+  berenjenas   3 ud
+  sal          1 cda
+  aceite       8 cda    "Aceite de oliva"
+  cebolla      1 ud
+  ajo          2 dientes
+  cordero      600 g    "Carne picada de cordero"
+  tomate       400 g    "Tomate triturado"
+  canela       1 cdta
+  vino         100 ml   "Vino tinto"
+  mantequilla  60 g
+  harina       60 g
+  leche        600 ml
+  huevo        1 ud
+  queso        80 g     "Queso kefalotyri rallado"
+
+herramientas
+  sartén, cazuela, cazo, fuente, horno
+
+bloque "Berenjenas"
+  laminas           = cortar(berenjenas) 5min
+  sudadas           = reposar(laminas, sal) 30min
+  berenjenas_fritas = freír(sudadas, aceite[3/4]) en sartén 20min
+fin
+
+bloque "Carne"
+  picado  = picar(cebolla, ajo) 5min
+  sofrito = pochar(picado, aceite[1/4]) en cazuela @fuego:bajo 8min
+  ragu    "Ragú de cordero" = guisar(sofrito, cordero, tomate, canela) en cazuela 40min
+    + vino a los 5min
+fin
+
+bloque "Bechamel"
+  roux           = cocinar(mantequilla, harina) en cazo 3min
+  bechamel       = cocinar(roux, leche) en cazo 10min hasta "espese"
+  bechamel_final "Bechamel con huevo y queso" = mezclar(bechamel, huevo, queso[1/2]) 2min aguanta 20min
+fin
+
+horno_caliente  "Horno a 180°C" = precalentar(horno) @180ºC 15min
+musaka_cruda    = montar(berenjenas_fritas, ragu, bechamel_final, queso[1/2]) en fuente 10min
+musaka_horneada = hornear(musaka_cruda) en horno_caliente @180ºC 45min hasta "gratine"
+musaka          = reposar(musaka_horneada) 20min
+
+servir musaka "Musaka"

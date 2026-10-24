@@ -1,0 +1,124 @@
+{
+  "lang": "es",
+  "cuisine": null,
+  "plan": null,
+  "cooks": null,
+  "burners": 1,
+  "packs": [],
+  "ingredients": [
+    {
+      "id": "arroz",
+      "quantity": 200,
+      "unit": "g"
+    },
+    {
+      "id": "agua",
+      "quantity": 400,
+      "unit": "ml"
+    },
+    {
+      "id": "pollo",
+      "quantity": 300,
+      "unit": "g"
+    }
+  ],
+  "steps": [
+    {
+      "id": "arroz_cocido",
+      "verb": "boil",
+      "kind": "heat",
+      "attention": "passive",
+      "duration": 20,
+      "durationMin": 20,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "arroz",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "agua",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "Arroz cocido"
+    },
+    {
+      "id": "pollo_dorado",
+      "verb": "brown",
+      "kind": "heat",
+      "attention": "active",
+      "duration": 10,
+      "durationMin": 10,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "pollo",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "Pollo dorado"
+    },
+    {
+      "id": "plato",
+      "verb": "mix",
+      "kind": "assemble",
+      "attention": "active",
+      "duration": 2,
+      "durationMin": 2,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "arroz_cocido",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "pollo_dorado",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": null
+    }
+  ],
+  "final": "plato",
+  "diagnostics": [],
+  "schedule": {
+    "normative": false,
+    "asap": {
+      "total": 32,
+      "starts": {
+        "arroz_cocido": 0,
+        "pollo_dorado": 20,
+        "plato": 30
+      },
+      "critical": [
+        "arroz_cocido",
+        "pollo_dorado",
+        "plato"
+      ],
+      "violations": []
+    },
+    "alap": {
+      "total": 32,
+      "starts": {
+        "arroz_cocido": 10,
+        "pollo_dorado": 0,
+        "plato": 30
+      },
+      "critical": [
+        "arroz_cocido",
+        "pollo_dorado",
+        "plato"
+      ],
+      "violations": []
+    }
+  }
+}

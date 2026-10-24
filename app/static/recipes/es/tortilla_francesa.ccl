@@ -1,0 +1,19 @@
+receta "Tortilla francesa"
+descripcion "La receta más simple: todo en línea, sin paralelismo"
+cocina "Francesa"
+raciones 1
+cocineros 1
+
+ingredientes
+  huevos   3 ud
+  sal      1 pizca
+  aceite   2 cda
+
+herramientas
+  tenedor, sartén
+
+mezcla "Mezcla de huevos" = batir(huevos, sal) con tenedor 2min
+aceite_caliente = calentar(aceite) en sartén @fuego:medio 1min
+tortilla = cocinar(mezcla, aceite_caliente) en sartén @fuego:medio 4-5min hasta "cuaje"
+
+servir tortilla "Tortilla francesa"

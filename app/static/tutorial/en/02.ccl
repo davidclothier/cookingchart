@@ -1,0 +1,12 @@
+recipe "Spaghetti with tomato sauce"
+
+ingredients
+  pasta  200 g
+  water  2 l
+  salt   1 tbsp
+
+boiling_water = boil(water) 8min
+cooked_pasta  = boil(pasta, boiling_water, salt) 10min
+spaghetti     = drain(cooked_pasta) 1min
+
+serve spaghetti

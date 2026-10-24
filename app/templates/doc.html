@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}{{ name | replace('-', ' ') | title }} · Cooking Chart{% endblock %}
+{% block description %}Cooking Chart — {{ name }}{% endblock %}
+
+{% block content %}
+<article class="prose prose-stone max-w-3xl prose-a:text-orange-700">
+    {{ body | safe }}
+</article>
+{% endblock %}

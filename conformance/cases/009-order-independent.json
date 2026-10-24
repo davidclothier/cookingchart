@@ -1,0 +1,144 @@
+{
+  "lang": "es",
+  "cuisine": null,
+  "plan": null,
+  "cooks": null,
+  "burners": null,
+  "packs": [],
+  "ingredients": [
+    {
+      "id": "patata",
+      "quantity": 2,
+      "unit": "ud"
+    },
+    {
+      "id": "huevo",
+      "quantity": 4,
+      "unit": "ud"
+    },
+    {
+      "id": "aceite",
+      "quantity": 200,
+      "unit": "ml"
+    }
+  ],
+  "steps": [
+    {
+      "id": "tortilla",
+      "verb": "cook",
+      "kind": "heat",
+      "attention": "active",
+      "duration": 8,
+      "durationMin": 8,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "mezcla",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": null
+    },
+    {
+      "id": "mezcla",
+      "verb": "mix",
+      "kind": "assemble",
+      "attention": "active",
+      "duration": 1,
+      "durationMin": 1,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "patatas_fritas",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "batido",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "Mezcla"
+    },
+    {
+      "id": "batido",
+      "verb": "beat",
+      "kind": "prep",
+      "attention": "active",
+      "duration": 2,
+      "durationMin": 2,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "huevo",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "Batido"
+    },
+    {
+      "id": "patatas_fritas",
+      "verb": "fry",
+      "kind": "heat",
+      "attention": "active",
+      "duration": 20,
+      "durationMin": 20,
+      "keep": null,
+      "tools": [],
+      "inputs": [
+        {
+          "ref": "patata",
+          "at": 0,
+          "fraction": null
+        },
+        {
+          "ref": "aceite",
+          "at": 0,
+          "fraction": null
+        }
+      ],
+      "output": "Patatas fritas"
+    }
+  ],
+  "final": "tortilla",
+  "diagnostics": [],
+  "schedule": {
+    "normative": true,
+    "asap": {
+      "total": 29,
+      "starts": {
+        "batido": 0,
+        "patatas_fritas": 0,
+        "mezcla": 20,
+        "tortilla": 21
+      },
+      "critical": [
+        "patatas_fritas",
+        "mezcla",
+        "tortilla"
+      ],
+      "violations": []
+    },
+    "alap": {
+      "total": 29,
+      "starts": {
+        "batido": 18,
+        "patatas_fritas": 0,
+        "mezcla": 20,
+        "tortilla": 21
+      },
+      "critical": [
+        "patatas_fritas",
+        "mezcla",
+        "tortilla"
+      ],
+      "violations": []
+    }
+  }
+}

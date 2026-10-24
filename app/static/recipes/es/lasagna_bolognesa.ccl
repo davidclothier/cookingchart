@@ -1,0 +1,40 @@
+receta "Lasaña boloñesa"
+descripcion "Dos salsas en paralelo que convergen en el montaje"
+cocina "Mediterránea"
+raciones 6
+cocineros 1
+
+ingredientes
+  cebolla      1 ud
+  zanahoria    1 ud
+  apio         1 tallo
+  carne        500 g    "Carne picada"
+  tomate       800 g    "Tomate triturado"
+  vino         100 ml   "Vino tinto"
+  mantequilla  50 g
+  harina       50 g
+  leche        500 ml
+  placas       250 g    "Placas de lasaña"
+  queso        200 g    "Queso rallado"
+
+herramientas
+  sartén, cazo, fuente, horno
+
+bloque "Boloñesa"
+  verduras      "Verduras picadas" = picar(cebolla, zanahoria, apio) 10min
+  sofrito       = pochar(verduras) en sartén @fuego:bajo 10min
+  carne_dorada  = dorar(sofrito, carne) en sartén @fuego:alto 15min
+  boloñesa      "Salsa boloñesa" = guisar(carne_dorada, tomate) en sartén @fuego:bajo 45min
+    + vino a los 5min
+fin
+
+bloque "Bechamel"
+  roux     = cocinar(mantequilla, harina) en cazo @fuego:medio 5min
+  bechamel = cocinar(roux, leche) en cazo @fuego:medio 8-10min hasta "espese" aguanta 30min
+fin
+
+horno_caliente "Horno a 180°C" = precalentar(horno) @180ºC 15min
+lasaña_cruda   "Lasaña montada" = montar(boloñesa, bechamel, placas, queso) en fuente 15min
+lasaña         = hornear(lasaña_cruda) en horno_caliente @180ºC 40min hasta "gratine"
+
+servir lasaña "Lasaña boloñesa"
